@@ -16,7 +16,7 @@ public class MainLoop{
 			Screen screen = new Screen(frame, new Dimension(400, 400), ImageIO.read(new File("C:/Users/Giovanni.ClarescoInc-PC/git/2D-game-engine/2D-game-engine/res/images/GameIcon.png")));
 			screen.enableFrame(frame);
 			while (true) {
-				screen.render(ImageIO.read(new File("C:/Users/Giovanni.ClarescoInc-PC/git/2D-game-engine/2D-game-engine/res/images/GameIcon.png")));
+				screen.render(ImageIO.read(new File("GameIcon.png")));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
