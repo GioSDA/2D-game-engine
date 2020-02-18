@@ -25,13 +25,6 @@ public class Screen extends Canvas {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	public void render(JFrame frame, Image image) {
-		Graphics g = frame.getGraphics();
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, getWidth(), getHeight());
-		g.drawImage(image,  0,  0, frame.getWidth(), frame.getHeight(), null);
-	}
-	
 	public void enableFrame(JFrame frame) {
 		frame.setVisible(true);
 	}
