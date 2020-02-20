@@ -19,8 +19,9 @@ public class MainLoop {
 			MainLoop mainloop = new MainLoop();
 			Screen screen = new Screen(frame, new Dimension(400, 400), ImageIO.read(mainloop.file));
 			screen.enableFrame(frame);
+			screen.addImage(ImageIO.read(mainloop.file), 0, 0, screen.getWidth(), screen.getHeight());
 			while (true) {
-				screen.render(ImageIO.read(mainloop.file));
+				screen.render();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
