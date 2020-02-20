@@ -9,10 +9,10 @@ import javax.swing.JFrame;
 
 import main.java.render.Screen;
 
-public class MainLoop{
+public class MainLoop {
 	public static JFrame frame = new JFrame();
 	
-	public File file = new File(MainLoop.class.getClassLoader().getResource("GameIcon.png").getFile());
+	public File file = new File(MainLoop.class.getClassLoader().getResource("main/res/images/GameIcon.png").getFile());
 	
 	public static void main(String[] args) {
 		try {
