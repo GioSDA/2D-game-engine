@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -60,6 +61,18 @@ public class Screen extends Canvas {
 		this.y.add(y);
 		this.width.add(width);
 		this.height.add(height);
+	}
+	
+	public void removeImage(int index) {
+		this.images.remove(index);
+		this.x.remove(index);
+		this.y.remove(index);
+		this.width.remove(index);
+		this.height.remove(index);
+	}
+	
+	public void changeItem(int index, int newValue, List<Integer> list) {
+		list.set(index, newValue);
 	}
 	
 }
