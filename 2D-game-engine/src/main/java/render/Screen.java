@@ -8,7 +8,6 @@ import java.awt.Image;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -17,24 +16,33 @@ public class Screen extends Canvas {
 
 	private static final long serialVersionUID = -7004570169397651722L;
 
+	JFrame frame;
+	
 	public List<Image> images = new ArrayList<Image>();
+	
 	public List<Integer> x = new ArrayList<Integer>();
 	public List<Integer> y = new ArrayList<Integer>();
 	public List<Integer> width = new ArrayList<Integer>();
 	public List<Integer> height = new ArrayList<Integer>();
 	
-	public Screen(JFrame frame, Dimension dimension, Image icon) throws IOException {
+	public Screen(JFrame frame, Dimension dimension) throws IOException {
+		this.frame = frame;
+		
 		frame.setPreferredSize(dimension);
 		frame.add(new Canvas());
 		frame.getContentPane().add(this);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		frame.setIconImage(icon);
 		frame.setTitle("Game");
+		frame.requestFocus();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	public void enableFrame(JFrame frame) {
+	public void setIcon(Image icon) {
+		frame.setIconImage(icon);
+	}
+	
+	public void enableFrame() {
 		frame.setVisible(true);
 	}
 	
