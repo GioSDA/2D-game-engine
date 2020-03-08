@@ -27,32 +27,33 @@ public class MainLoop {
 			screen.addImage(ImageIO.read(mainloop.file), 200, 200, 50, 25);
 			
 			long timer = System.currentTimeMillis();
-			long frames = 0;
-			long ticks = 0;
+			int frames = 0;
+			int ticks = 0;
 			
-			long last = System.currentTimeMillis();
-			long e = 0;
-			long f = 0;
+			long last = System.nanoTime();
+			double e = 0;
+			double f = 0;
 			
 			while (true) {
 				long now = System.nanoTime();
-				e += (now - last) / fps * 0.000000001;
-				f += (now - last) / tps * 0.000000001;
+				e += (now - last) / (1000000000.0 / tps);
+				f += (now - last) / (1000000000.0 / fps);
+				last = now;
 				
-				if (e >= 1) { 
+				while (e >= 1) { 
 					tick();
 					e--; 
 					ticks++;
 				}
 				
-				if (f >= 1) { 
+				while (f >= 1) { 
 					screen.render();
 					f--; 
 					frames++;
 				}
 
 				if (System.currentTimeMillis() - timer >= 1000) { 
-					System.out.println(tps + ", " + fps);
+					System.out.println(ticks + ", " + frames);
 					timer += 1000;
 					frames = 0;
 					ticks = 0;

@@ -27,13 +27,13 @@ public class Screen extends Canvas {
 	
 	public Screen(JFrame frame, Dimension dimension) throws IOException {
 		this.frame = frame;
-		
 		frame.setPreferredSize(dimension);
 		frame.add(new Canvas());
 		frame.getContentPane().add(this);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setTitle("Game");
+		frame.setResizable(false);
 		frame.requestFocus();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
