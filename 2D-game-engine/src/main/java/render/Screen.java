@@ -16,7 +16,7 @@ public class Screen extends Canvas {
 
 	private static final long serialVersionUID = -7004570169397651722L;
 
-	JFrame frame;
+	public JFrame frame;
 	
 	public List<Image> images = new ArrayList<Image>();
 	
@@ -28,14 +28,14 @@ public class Screen extends Canvas {
 	public Screen(JFrame frame, Dimension dimension) throws IOException {
 		this.frame = frame;
 		frame.setPreferredSize(dimension);
-		frame.add(new Canvas());
 		frame.getContentPane().add(this);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setTitle("Game");
 		frame.setResizable(false);
-		frame.requestFocus();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setFocusable(true);
+		frame.requestFocus();
 	}
 	
 	public void setIcon(Image icon) {

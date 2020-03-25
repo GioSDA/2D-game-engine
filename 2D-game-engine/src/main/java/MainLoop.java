@@ -7,6 +7,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import main.java.input.KeyboardInput;
+import main.java.input.MouseInput;
 import main.java.render.Screen;
 
 public class MainLoop {
@@ -14,7 +16,10 @@ public class MainLoop {
 	public static int fps = 60;
 	
 	public File file = new File(MainLoop.class.getClassLoader().getResource("main/res/images/GameIcon.png").getFile());
-	public static int i = 0;
+	public static int i = 1;
+	
+	public static KeyboardInput key = new KeyboardInput();
+	public static MouseInput mouse = new MouseInput();
 	
 	public static Screen screen;
 	
@@ -22,6 +27,10 @@ public class MainLoop {
 		try {
 			MainLoop mainloop = new MainLoop();
 			screen = new Screen(new JFrame(), new Dimension(400, 400));
+			screen.addKeyListener(key);
+			screen.addMouseListener(mouse);
+			screen.setFocusable(true);
+			screen.requestFocus();
 			screen.enableFrame();
 			screen.addImage(ImageIO.read(mainloop.file), 0, 0, screen.getWidth(), screen.getHeight());
 			screen.addImage(ImageIO.read(mainloop.file), 200, 200, 50, 25);
@@ -63,12 +72,13 @@ public class MainLoop {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println("Image file could not be read.");
 			System.exit(0);
 		}
 	}
 	
 	public static void tick() {
-		i++;
+		if (KeyboardInput.keys[87]) i += 10;
 		screen.changeItem(1, i, screen.height);
 	}
 	
