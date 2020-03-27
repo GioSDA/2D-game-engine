@@ -38,8 +38,16 @@ public class Screen extends Canvas {
 		frame.requestFocus();
 	}
 	
+	public void setSize(Dimension dimension) {
+		frame.setPreferredSize(dimension);
+	}
+	
 	public void setIcon(Image icon) {
 		frame.setIconImage(icon);
+	}
+	
+	public void setTitle(String title) {
+		frame.setTitle(title);
 	}
 	
 	public void enableFrame() {
@@ -80,6 +88,10 @@ public class Screen extends Canvas {
 	}
 	
 	public void changeItem(int index, int newValue, List<Integer> list) {
+		list.set(index, newValue);
+	}
+	
+	public void changeItem(int index, Image newValue, List<Image> list) {
 		list.set(index, newValue);
 	}
 	
