@@ -79,7 +79,6 @@ public class MainLoop {
 	
 	public static void tick() {
 		if (KeyboardInput.keys[87]) i += 10;
-		screen.changeItem(1, i, screen.height);
 	}
 	
 }

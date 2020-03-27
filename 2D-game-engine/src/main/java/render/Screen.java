@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +18,14 @@ public class Screen extends Canvas {
 	private static final long serialVersionUID = -7004570169397651722L;
 
 	public JFrame frame;
+	public int[] pixels;
 	
-	public List<Image> images = new ArrayList<Image>();
+	public BufferedImage inBetween;
+	
+	public List<BufferedImage> images = new ArrayList<BufferedImage>();
 	
 	public List<Integer> x = new ArrayList<Integer>();
 	public List<Integer> y = new ArrayList<Integer>();
-	public List<Integer> width = new ArrayList<Integer>();
-	public List<Integer> height = new ArrayList<Integer>();
 	
 	public Screen(JFrame frame, Dimension dimension) throws IOException {
 		this.frame = frame;
@@ -36,7 +38,12 @@ public class Screen extends Canvas {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setFocusable(true);
 		frame.requestFocus();
+		
+		pixels = new int[getWidth()*getHeight()];
+		inBetween = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
 	}
+	
+	
 	
 	public void setSize(Dimension dimension) {
 		frame.setPreferredSize(dimension);
@@ -54,6 +61,19 @@ public class Screen extends Canvas {
 		frame.setVisible(true);
 	}
 	
+	public void setPixels() {
+		for (int i = 0; i < images.size(); i++) {
+			for (int j = 0; j < images.get(i).getHeight(); j++) {
+				for (int l = 0; l < images.get(i).getWidth(); l++) {
+					pixels[j*getWidth() + l] = images.get(i).getRGB(l, j);
+				}
+			}
+		}
+		for (int i = 0; i < pixels.length; i++) {
+			inBetween.setRGB(i % getWidth(), i / getWidth(), pixels[i]);
+		}
+	}
+	
 	public void render() {
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
@@ -61,30 +81,28 @@ public class Screen extends Canvas {
 			return;
 		}
 		
+		setPixels();
+		
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.WHITE);
 		g.drawRect(0, 0, getWidth(), getHeight());
 		for (int i = 0; i < images.size(); i++) {
-			g.drawImage(this.images.get(i), (int)this.x.get(i), (int)this.y.get(i), (int)this.width.get(i), (int)this.height.get(i), null);
+			g.drawImage(inBetween, 0, 0, getWidth(), getHeight(), null);
 		}
 		g.dispose();
 		bs.show();
 	}
 	
-	public void addImage(Image image, int x, int y, int width, int height) {
+	public void addImage(BufferedImage image, int x, int y, int width, int height) {
 		this.images.add(image);
 		this.x.add(x);
 		this.y.add(y);
-		this.width.add(width);
-		this.height.add(height);
 	}
 	
 	public void removeImage(int index) {
 		this.images.remove(index);
 		this.x.remove(index);
 		this.y.remove(index);
-		this.width.remove(index);
-		this.height.remove(index);
 	}
 	
 	public void changeItem(int index, int newValue, List<Integer> list) {
