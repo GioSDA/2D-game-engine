@@ -1,9 +1,9 @@
 package main.java.render;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -65,9 +65,10 @@ public class Screen extends Canvas {
 		for (int i = 0; i < images.size(); i++) {
 			for (int j = 0; j < images.get(i).getHeight(); j++) {
 				for (int l = 0; l < images.get(i).getWidth(); l++) {
-					pixels[j*getWidth() + l] = images.get(i).getRGB(l, j);
+					if (images.get(i).getRGB(l, j) != 0xFF00FF && j*getWidth() + l <= pixels.length) pixels[j*getWidth() + l] = images.get(i).getRGB(l, j);
 				}
 			}
+			images.set(i, resize(images.get(i), images.get(i).getWidth(), images.get(i).getHeight()));
 		}
 		for (int i = 0; i < pixels.length; i++) {
 			inBetween.setRGB(i % getWidth(), i / getWidth(), pixels[i]);
@@ -84,13 +85,20 @@ public class Screen extends Canvas {
 		setPixels();
 		
 		Graphics g = bs.getDrawGraphics();
-		g.setColor(Color.WHITE);
-		g.drawRect(0, 0, getWidth(), getHeight());
-		for (int i = 0; i < images.size(); i++) {
-			g.drawImage(inBetween, 0, 0, getWidth(), getHeight(), null);
-		}
+		g.drawImage(inBetween, 0, 0, getWidth(), getHeight(), null);
 		g.dispose();
 		bs.show();
+	}
+	
+	public BufferedImage resize(BufferedImage img, int width, int height) {
+		Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+	    BufferedImage dimg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+	    Graphics2D g2d = dimg.createGraphics();
+	    g2d.drawImage(tmp, 0, 0, null);
+	    g2d.dispose();
+
+	    return dimg;
 	}
 	
 	public void addImage(BufferedImage image, int x, int y, int width, int height) {
