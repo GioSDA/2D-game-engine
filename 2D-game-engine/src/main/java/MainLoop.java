@@ -16,7 +16,6 @@ public class MainLoop {
 	public static int fps = 60;
 	
 	public File file = new File(MainLoop.class.getClassLoader().getResource("main/res/images/GameIcon.png").getFile());
-	public static int i = 1;
 	
 	public static KeyboardInput key = new KeyboardInput();
 	public static MouseInput mouse = new MouseInput();
@@ -78,7 +77,7 @@ public class MainLoop {
 	}
 	
 	public static void tick() {
-		if (KeyboardInput.keys[87]) i += 10;
+		
 	}
 	
 }
