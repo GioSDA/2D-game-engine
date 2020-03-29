@@ -5,6 +5,8 @@ import java.awt.event.MouseListener;
 
 public class MouseInput implements MouseListener {
 
+	public static boolean[] mouseButtons = new boolean[15];
+	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		
@@ -22,12 +24,12 @@ public class MouseInput implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		
+		mouseButtons[arg0.getButton()] = true;
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		
+		mouseButtons[arg0.getButton()] = false;
 	}
 
 }
