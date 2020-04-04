@@ -13,6 +13,9 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import main.java.shape.Rectangle;
+import main.java.shape.Shape;
+
 public class Screen extends Canvas {
 
 	private static final long serialVersionUID = -7004570169397651722L;
@@ -22,10 +25,7 @@ public class Screen extends Canvas {
 	
 	public BufferedImage inBetween;
 	
-	public List<BufferedImage> images = new ArrayList<BufferedImage>();
-	
-	public List<Integer> x = new ArrayList<Integer>();
-	public List<Integer> y = new ArrayList<Integer>();
+	public List<Shape> shapes = new ArrayList<Shape>();
 	
 	public Screen(JFrame frame, Dimension dimension) throws IOException {
 		this.frame = frame;
@@ -62,13 +62,13 @@ public class Screen extends Canvas {
 	}
 	
 	public void setPixels() {
-		for (int i = 0; i < images.size(); i++) {
-			for (int j = 0; j < images.get(i).getHeight(); j++) {
-				for (int l = 0; l < images.get(i).getWidth(); l++) {
-					if (images.get(i).getRGB(l, j) != 0xFF00FF && j*getWidth() + l <= pixels.length) pixels[j*getWidth() + l] = images.get(i).getRGB(l, j);
+		for (int i = 0; i < shapes.size(); i++) {
+			for (int j = 0; j < shapes.get(i).getTexture().getHeight(); j++) {
+				for (int l = 0; l < shapes.get(i).getTexture().getWidth(); l++) {
+					if (shapes.get(i).getTexture().getRGB(l, j) != 0xFF00FF && j*getWidth() + l < pixels.length) pixels[j*getWidth() + l] = shapes.get(i).getTexture().getRGB(l, j);
 				}
 			}
-			images.set(i, resize(images.get(i), images.get(i).getWidth(), images.get(i).getHeight()));
+			shapes.get(i).setTexture(resize(shapes.get(i).getTexture(), shapes.get(i).getWidth(), shapes.get(i).getHeight()));
 		}
 		for (int i = 0; i < pixels.length; i++) {
 			inBetween.setRGB(i % getWidth(), i / getWidth(), pixels[i]);
@@ -101,16 +101,12 @@ public class Screen extends Canvas {
 	    return dimg;
 	}
 	
-	public void addImage(BufferedImage image, int x, int y, int width, int height) {
-		this.images.add(image);
-		this.x.add(x);
-		this.y.add(y);
+	public void addRect(int x, int y, int width, int height, BufferedImage texture) {
+		this.shapes.add(new Rectangle(x, y, width, height, texture));
 	}
 	
-	public void removeImage(int index) {
-		this.images.remove(index);
-		this.x.remove(index);
-		this.y.remove(index);
+	public void removeShape(int index) {
+		this.shapes.remove(index);
 	}
 	
 	public void changeItem(int index, int newValue, List<Integer> list) {

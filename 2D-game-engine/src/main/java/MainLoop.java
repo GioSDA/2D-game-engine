@@ -31,7 +31,7 @@ public class MainLoop {
 			screen.setFocusable(true);
 			screen.requestFocus();
 			screen.enableFrame();
-			screen.addImage(ImageIO.read(mainloop.file), 0, 0, screen.getWidth(), screen.getHeight());
+			screen.addRect(0, 0, screen.getWidth(), screen.getHeight(), ImageIO.read(mainloop.file));
 			
 			long timer = System.currentTimeMillis();
 			int frames = 0;
