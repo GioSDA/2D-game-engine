@@ -1,6 +1,7 @@
 package main.java.render;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -39,8 +40,8 @@ public class Screen extends Canvas {
 		frame.setFocusable(true);
 		frame.requestFocus();
 		
-		pixels = new int[getWidth()*getHeight()];
-		inBetween = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
+		pixels = new int[(int)dimension.getWidth()*(int)dimension.getHeight()];
+		inBetween = new BufferedImage((int)dimension.getWidth(), (int)dimension.getHeight(), BufferedImage.TYPE_INT_RGB);
 	}
 	
 	
@@ -63,15 +64,18 @@ public class Screen extends Canvas {
 	
 	public void setPixels() {
 		for (int i = 0; i < shapes.size(); i++) {
-			for (int j = 0; j < shapes.get(i).getTexture().getHeight(); j++) {
-				for (int l = 0; l < shapes.get(i).getTexture().getWidth(); l++) {
-					if (shapes.get(i).getTexture().getRGB(l, j) != 0xFF00FF && j*getWidth() + l < pixels.length) pixels[j*getWidth() + l] = shapes.get(i).getTexture().getRGB(l, j);
+			Shape shape = shapes.get(i);
+			shape.setTexture(resize(shape.getTexture(), shape.getWidth(), shape.getHeight()));
+			for (int j = 0; j < shape.getTexture().getHeight(); j++) {
+				for (int l = 0; l < shape.getTexture().getWidth(); l++) {
+					if (l + shape.getX() < inBetween.getWidth() && j + shape.getY() < inBetween.getHeight() && j*getWidth() + l < pixels.length)
+						if (shape.getTexture().getRGB(l, j) != 0xFF00FF) pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = shape.getTexture().getRGB(l, j);
 				}
 			}
-			shapes.get(i).setTexture(resize(shapes.get(i).getTexture(), shapes.get(i).getWidth(), shapes.get(i).getHeight()));
 		}
+		
 		for (int i = 0; i < pixels.length; i++) {
-			inBetween.setRGB(i % getWidth(), i / getWidth(), pixels[i]);
+			inBetween.setRGB(i % inBetween.getHeight(), i / inBetween.getWidth(), pixels[i]);
 		}
 	}
 	
@@ -102,11 +106,21 @@ public class Screen extends Canvas {
 	}
 	
 	public void addRect(int x, int y, int width, int height, BufferedImage texture) {
-		this.shapes.add(new Rectangle(x, y, width, height, texture));
+		shapes.add(new Rectangle(x, y, width, height, texture));
+	}
+	
+	public void addRect(int x, int y, int width, int height, Color colour) {
+		BufferedImage b = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2d = b.createGraphics();
+		g2d.setColor(colour);
+		g2d.fillRect(0, 0, b.getWidth(), b.getHeight());
+		g2d.dispose();
+		
+		shapes.add(new Rectangle(x, y, width, height, b));
 	}
 	
 	public void removeShape(int index) {
-		this.shapes.remove(index);
+		shapes.remove(index);
 	}
 	
 	public void changeItem(int index, int newValue, List<Integer> list) {

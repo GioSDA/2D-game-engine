@@ -1,5 +1,6 @@
 package main.java;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +32,8 @@ public class MainLoop {
 			screen.setFocusable(true);
 			screen.requestFocus();
 			screen.enableFrame();
-			screen.addRect(0, 0, screen.getWidth(), screen.getHeight(), ImageIO.read(mainloop.file));
+			screen.addRect(0, 0, 399, 399, ImageIO.read(mainloop.file));
+			screen.addRect(0, 50, 50, 75, Color.RED);
 			
 			long timer = System.currentTimeMillis();
 			int frames = 0;
