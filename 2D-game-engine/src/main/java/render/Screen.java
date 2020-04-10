@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
+import main.java.shape.Ellipse;
 import main.java.shape.Rectangle;
 import main.java.shape.Shape;
 
@@ -69,7 +70,7 @@ public class Screen extends Canvas {
 			for (int j = 0; j < shape.getTexture().getHeight(); j++) {
 				for (int l = 0; l < shape.getTexture().getWidth(); l++) {
 					if (l + shape.getX() < inBetween.getWidth() && j + shape.getY() < inBetween.getHeight() && j*getWidth() + l < pixels.length)
-						if (shape.getTexture().getRGB(l, j) != 0xFF00FF) pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = shape.getTexture().getRGB(l, j);
+						if (shape.getTexture().getRGB(l, j) != -65281) pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = shape.getTexture().getRGB(l, j);
 				}
 			}
 		}
@@ -96,11 +97,11 @@ public class Screen extends Canvas {
 	
 	public BufferedImage resize(BufferedImage img, int width, int height) {
 		Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-	    BufferedImage dimg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+	    BufferedImage dimg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-	    Graphics2D g2d = dimg.createGraphics();
-	    g2d.drawImage(tmp, 0, 0, null);
-	    g2d.dispose();
+	    Graphics2D gg2d = dimg.createGraphics();
+	    gg2d.drawImage(tmp, 0, 0, null);
+	    gg2d.dispose();
 
 	    return dimg;
 	}
@@ -110,13 +111,42 @@ public class Screen extends Canvas {
 	}
 	
 	public void addRect(int x, int y, int width, int height, Color colour) {
-		BufferedImage b = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage b = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2d = b.createGraphics();
 		g2d.setColor(colour);
 		g2d.fillRect(0, 0, b.getWidth(), b.getHeight());
 		g2d.dispose();
 		
 		shapes.add(new Rectangle(x, y, width, height, b));
+	}
+	
+	public void addEllipse(int x, int y, int width, int height, Color colour) {
+		BufferedImage b = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g2d = b.createGraphics();
+		g2d.setColor(new Color(255, 0, 255));
+		g2d.fillRect(0, 0, b.getWidth(), b.getHeight());
+		g2d.setColor(colour);
+		g2d.fillOval(0, 0, width, height);
+		g2d.dispose();
+		
+		shapes.add(new Ellipse(x, y, width, height, b));
+	}
+	
+	public void addEllipse(int x, int y, int width, int height, BufferedImage texture) {
+		BufferedImage b = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g2d = b.createGraphics();
+		g2d.setColor(new Color(255, 0, 255));
+		g2d.fillOval(0, 0, width, height);
+		BufferedImage resText = resize(texture, width, height);
+		for (int i = 0; i < b.getWidth(); i++) {
+			for (int j = 0; j < b.getHeight(); j++) {
+				if (b.getRGB(i, j) == -16777216) b.setRGB(i, j, -65281);
+				else if (b.getRGB(i, j) == -65281) b.setRGB(i, j, resText.getRGB(i, j));
+			}
+		}
+		g2d.dispose();
+		
+		shapes.add(new Ellipse(x, y, width, height, b));
 	}
 	
 	public void removeShape(int index) {

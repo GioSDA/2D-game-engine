@@ -32,8 +32,10 @@ public class MainLoop {
 			screen.setFocusable(true);
 			screen.requestFocus();
 			screen.enableFrame();
-			screen.addRect(0, 0, 399, 399, ImageIO.read(mainloop.file));
-			screen.addRect(0, 50, 50, 75, Color.RED);
+			screen.addRect(0, 0, 400, 400, ImageIO.read(mainloop.file));
+			screen.addRect(0, 0, 50, 75, Color.RED);
+			screen.addEllipse(5, 50, 50, 50, Color.BLACK);
+			screen.addEllipse(0, 0, 75, 75, ImageIO.read(mainloop.file));
 			
 			long timer = System.currentTimeMillis();
 			int frames = 0;
