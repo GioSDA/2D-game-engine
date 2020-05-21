@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import main.java.input.KeyboardInput;
 import main.java.input.MouseInput;
 import main.java.render.Screen;
+import main.java.shape.RenderMode;
 
 public class MainLoop {
 	public static int tps = 60;
@@ -32,10 +33,8 @@ public class MainLoop {
 			screen.setFocusable(true);
 			screen.requestFocus();
 			screen.enableFrame();
-			screen.addRect(0, 0, 400, 400, ImageIO.read(mainloop.file));
-			screen.addRect(0, 0, 50, 75, Color.RED);
-			screen.addEllipse(5, 50, 50, 50, Color.BLACK);
-			screen.addEllipse(0, 0, 75, 75, ImageIO.read(mainloop.file));
+			screen.addRect(0, 0, 400, 400, 0, ImageIO.read(mainloop.file), RenderMode.LU_CORNER);
+			screen.addRect(150, 150, 100, 100, 0, Color.RED,RenderMode.CENTER);
 			
 			long timer = System.currentTimeMillis();
 			int frames = 0;

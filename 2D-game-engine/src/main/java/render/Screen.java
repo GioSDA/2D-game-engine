@@ -14,8 +14,8 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import main.java.shape.Ellipse;
 import main.java.shape.Rectangle;
+import main.java.shape.RenderMode;
 import main.java.shape.Shape;
 
 public class Screen extends Canvas {
@@ -64,13 +64,12 @@ public class Screen extends Canvas {
 	}
 	
 	public void setPixels() {
-		for (int i = 0; i < shapes.size(); i++) {
-			Shape shape = shapes.get(i);
-			shape.setTexture(resize(shape.getTexture(), shape.getWidth(), shape.getHeight()));
+		for (Shape shape : shapes) {
 			for (int j = 0; j < shape.getTexture().getHeight(); j++) {
 				for (int l = 0; l < shape.getTexture().getWidth(); l++) {
 					if (l + shape.getX() < inBetween.getWidth() && j + shape.getY() < inBetween.getHeight() && j*getWidth() + l < pixels.length)
 						if (shape.getTexture().getRGB(l, j) != -65281) pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = shape.getTexture().getRGB(l, j);
+						else pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = 0;
 				}
 			}
 		}
@@ -81,6 +80,7 @@ public class Screen extends Canvas {
 	}
 	
 	public void render() {
+		
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
 			createBufferStrategy(3);
@@ -95,58 +95,32 @@ public class Screen extends Canvas {
 		bs.show();
 	}
 	
-	public BufferedImage resize(BufferedImage img, int width, int height) {
-		Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-	    BufferedImage dimg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-
-	    Graphics2D gg2d = dimg.createGraphics();
-	    gg2d.drawImage(tmp, 0, 0, null);
-	    gg2d.dispose();
-
-	    return dimg;
+	public void addRect(int x, int y, int width, int height, double rotation, BufferedImage texture, RenderMode renderMode) {
+		shapes.add(new Rectangle(x, y, width, height, rotation, Shape.rotate(Shape.resize(texture, width, height), rotation), renderMode));
 	}
 	
-	public void addRect(int x, int y, int width, int height, BufferedImage texture) {
-		shapes.add(new Rectangle(x, y, width, height, texture));
+	public void addRect(int x, int y, int width, int height, double rotation, BufferedImage texture) {
+		shapes.add(new Rectangle(x, y, width, height, rotation, Shape.rotate(Shape.resize(texture, width, height), rotation), RenderMode.LU_CORNER));
 	}
 	
-	public void addRect(int x, int y, int width, int height, Color colour) {
+	public void addRect(int x, int y, int width, int height, double rotation, Color colour, RenderMode renderMode) {
 		BufferedImage b = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2d = b.createGraphics();
 		g2d.setColor(colour);
 		g2d.fillRect(0, 0, b.getWidth(), b.getHeight());
 		g2d.dispose();
 		
-		shapes.add(new Rectangle(x, y, width, height, b));
+		shapes.add(new Rectangle(x, y, width, height, rotation, b, renderMode));
 	}
 	
-	public void addEllipse(int x, int y, int width, int height, Color colour) {
+	public void addRect(int x, int y, int width, int height, double rotation, Color colour) {
 		BufferedImage b = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2d = b.createGraphics();
-		g2d.setColor(new Color(255, 0, 255));
-		g2d.fillRect(0, 0, b.getWidth(), b.getHeight());
 		g2d.setColor(colour);
-		g2d.fillOval(0, 0, width, height);
+		g2d.fillRect(0, 0, b.getWidth(), b.getHeight());
 		g2d.dispose();
 		
-		shapes.add(new Ellipse(x, y, width, height, b));
-	}
-	
-	public void addEllipse(int x, int y, int width, int height, BufferedImage texture) {
-		BufferedImage b = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		Graphics2D g2d = b.createGraphics();
-		g2d.setColor(new Color(255, 0, 255));
-		g2d.fillOval(0, 0, width, height);
-		BufferedImage resText = resize(texture, width, height);
-		for (int i = 0; i < b.getWidth(); i++) {
-			for (int j = 0; j < b.getHeight(); j++) {
-				if (b.getRGB(i, j) == -16777216) b.setRGB(i, j, -65281);
-				else if (b.getRGB(i, j) == -65281) b.setRGB(i, j, resText.getRGB(i, j));
-			}
-		}
-		g2d.dispose();
-		
-		shapes.add(new Ellipse(x, y, width, height, b));
+		shapes.add(new Rectangle(x, y, width, height, rotation, b, RenderMode.LU_CORNER));
 	}
 	
 	public void removeShape(int index) {
