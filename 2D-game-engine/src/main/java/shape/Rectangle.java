@@ -17,7 +17,7 @@ public class Rectangle extends Shape {
 			this.texture = texture;
 			break;
 		case RU_CORNER:
-			this.x = x+width;
+			this.x = x-width;
 			this.y = y;
 			this.width = width;
 			this.height = height;
@@ -26,15 +26,15 @@ public class Rectangle extends Shape {
 			break;
 		case LD_CORNER:
 			this.x = x;
-			this.y = y+height;
+			this.y = y-height;
 			this.width = width;
 			this.height = height;
 			this.rotation = rotation;
 			this.texture = texture;
 			break;
 		case RD_CORNER:
-			this.x = x+width;
-			this.y = y+height;
+			this.x = x-width;
+			this.y = y-height;
 			this.width = width;
 			this.height = height;
 			this.rotation = rotation;

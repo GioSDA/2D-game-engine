@@ -27,7 +27,7 @@ public class Screen extends Canvas {
 	
 	public BufferedImage inBetween;
 	
-	public List<Shape> shapes = new ArrayList<Shape>();
+	public static List<Shape> shapes = new ArrayList<Shape>();
 	
 	public Screen(JFrame frame, Dimension dimension) throws IOException {
 		this.frame = frame;

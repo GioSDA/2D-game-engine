@@ -2,6 +2,7 @@ package main.java.shape;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 public abstract class Shape {
@@ -62,7 +63,7 @@ public abstract class Shape {
 		return rotation;
 	}
 
-	public void setRot(int rotation) {
+	public void setRot(double rotation) {
 		this.rotation = rotation;
 		setTexture(rotate(getTexture(), rotation));
 	}
@@ -76,15 +77,16 @@ public abstract class Shape {
 	}
 	
 	public static BufferedImage rotate(BufferedImage image, double angle) {
-	    double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
-	    int w = image.getWidth(), h = image.getHeight();
-	    int neww = (int) Math.floor(w * cos + h * sin), newh = (int) Math.floor(h * cos + w * sin);
-	    BufferedImage result = new BufferedImage(neww, newh, BufferedImage.TYPE_INT_RGB);
-	    Graphics2D g = result.createGraphics();
-	    g.translate((neww - w) / 2, (newh - h) / 2);
-	    g.rotate(angle, w / 2, h / 2);
-	    g.drawRenderedImage(image, null);
-	    return result;
+	    AffineTransform at = AffineTransform.getTranslateInstance(0, 0);
+	    at.rotate(Math.toRadians(angle));
+	    BufferedImage dimg = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
+	    
+	    Graphics2D g2d = dimg.createGraphics();
+	    
+	    g2d.drawImage(image, at, null);
+	    g2d.dispose();
+	    
+	    return dimg;
 	  }
 
 	public static BufferedImage resize(BufferedImage img, int width, int height) {
