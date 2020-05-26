@@ -15,7 +15,6 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import main.java.shape.Rectangle;
-import main.java.shape.RenderMode;
 import main.java.shape.Shape;
 
 public class Screen extends Canvas {
