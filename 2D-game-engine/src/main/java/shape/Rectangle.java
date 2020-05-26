@@ -2,12 +2,13 @@ package main.java.shape;
 
 import java.awt.image.BufferedImage;
 
+import main.java.MainLoop;
+
 public class Rectangle extends Shape {
 	
-	public Rectangle(int x, int y, int width, int height, double rotation, BufferedImage texture, RenderMode renderMode) {
-		super(x, y, width, height, rotation, texture, renderMode);
-		this.renderMode = renderMode;
-		switch (renderMode) {
+	public Rectangle(int x, int y, int width, int height, double rotation, BufferedImage texture) {
+		super(x, y, width, height, rotation, texture);
+		switch (MainLoop.renderMode) {
 		case LU_CORNER:
 			this.x = x;
 			this.y = y;

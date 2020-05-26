@@ -11,18 +11,9 @@ public abstract class Shape {
 	public int width, height;
 	public double rotation;
 	public BufferedImage texture;
-	public RenderMode renderMode;
 	
-	public Shape(int x, int y, int width, int height, double rotation, BufferedImage texture, RenderMode renderMode) {
+	public Shape(int x, int y, int width, int height, double rotation, BufferedImage texture) {
 		
-	}
-	
-	public RenderMode getRenderMode() {
-		return renderMode;
-	}
-
-	public void setRenderMode(RenderMode renderMode) {
-		this.renderMode = renderMode;
 	}
 
 	public int getX() {

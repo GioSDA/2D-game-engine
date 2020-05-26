@@ -19,6 +19,8 @@ public class MainLoop {
 	
 //	public static double i = 0;
 	
+	public static RenderMode renderMode;
+	
 	public File file = new File(MainLoop.class.getClassLoader().getResource("main/res/images/GameIcon.png").getFile());
 	
 	public static KeyboardInput key = new KeyboardInput();
@@ -35,8 +37,8 @@ public class MainLoop {
 			screen.setFocusable(true);
 			screen.requestFocus();
 			screen.enableFrame();
-			screen.addRect(0, 0, 400, 400, 0, ImageIO.read(mainloop.file), RenderMode.LU_CORNER);
-			screen.addRect(150, 150, 100, 100, 0, Color.RED, RenderMode.CENTER);
+			screen.addRect(0, 0, 400, 400, 0, ImageIO.read(mainloop.file));
+			screen.addRect(150, 150, 100, 100, 0, Color.RED);
 			
 			long timer = System.currentTimeMillis();
 			int frames = 0;

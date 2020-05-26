@@ -95,22 +95,8 @@ public class Screen extends Canvas {
 		bs.show();
 	}
 	
-	public void addRect(int x, int y, int width, int height, double rotation, BufferedImage texture, RenderMode renderMode) {
-		shapes.add(new Rectangle(x, y, width, height, rotation, Shape.rotate(Shape.resize(texture, width, height), rotation), renderMode));
-	}
-	
 	public void addRect(int x, int y, int width, int height, double rotation, BufferedImage texture) {
-		shapes.add(new Rectangle(x, y, width, height, rotation, Shape.rotate(Shape.resize(texture, width, height), rotation), RenderMode.LU_CORNER));
-	}
-	
-	public void addRect(int x, int y, int width, int height, double rotation, Color colour, RenderMode renderMode) {
-		BufferedImage b = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		Graphics2D g2d = b.createGraphics();
-		g2d.setColor(colour);
-		g2d.fillRect(0, 0, b.getWidth(), b.getHeight());
-		g2d.dispose();
-		
-		shapes.add(new Rectangle(x, y, width, height, rotation, b, renderMode));
+		shapes.add(new Rectangle(x, y, width, height, rotation, Shape.rotate(Shape.resize(texture, width, height), rotation)));
 	}
 	
 	public void addRect(int x, int y, int width, int height, double rotation, Color colour) {
@@ -120,7 +106,7 @@ public class Screen extends Canvas {
 		g2d.fillRect(0, 0, b.getWidth(), b.getHeight());
 		g2d.dispose();
 		
-		shapes.add(new Rectangle(x, y, width, height, rotation, b, RenderMode.LU_CORNER));
+		shapes.add(new Rectangle(x, y, width, height, rotation, b));
 	}
 	
 	public void removeShape(int index) {
