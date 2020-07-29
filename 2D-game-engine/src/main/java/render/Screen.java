@@ -65,12 +65,23 @@ public class Screen extends Canvas {
 	
 	public void setPixels() {
 		for (Shape shape : shapes) {
-			for (int j = 0; j < shape.getSprite().getTexture().getHeight(); j++) {
-				for (int l = 0; l < shape.getSprite().getTexture().getWidth(); l++) {
-					if (l + shape.getX() < inBetween.getWidth() && j + shape.getY() < inBetween.getHeight() && j*getWidth() + l < pixels.length)
-						if (shape.getSprite().getTexture().getRGB(l, j) != -65281) pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = shape.getSprite().getTexture().getRGB(l, j);
-						else pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = 0;
+			if (shape.isAnimated()) {
+				for (int j = 0; j < shape.getSprite().getTexture().getHeight(); j++) {
+					for (int l = 0; l < shape.getSprite().getTexture().getWidth(); l++) {
+						if (l + shape.getX() < inBetween.getWidth() && j + shape.getY() < inBetween.getHeight() && j*getWidth() + l < pixels.length)
+							if (shape.getSprite().getTexture().getRGB(l, j) != -65281) pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = shape.getSprite().getTexture().getRGB(l, j);
+							else pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = 0;
+					}
 				}
+			} else {
+				for (int j = 0; j < shape.getAnimation().getSprite(shape.animIndex).getTexture().getHeight(); j++) {
+					for (int l = 0; l < shape.getAnimation().getSprite(shape.animIndex).getTexture().getWidth(); l++) {
+						if (l + shape.getX() < inBetween.getWidth() && j + shape.getY() < inBetween.getHeight() && j*getWidth() + l < pixels.length)
+							if (shape.getSprite().getTexture().getRGB(l, j) != -65281) pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = shape.getSprite().getTexture().getRGB(l, j);
+							else pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = 0;
+					}
+				}
+				shape.animIndex++;
 			}
 		}
 		

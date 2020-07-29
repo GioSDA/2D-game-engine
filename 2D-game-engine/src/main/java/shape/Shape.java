@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
+import main.java.sprite.Animation;
 import main.java.sprite.Sprite;
 
 public abstract class Shape {
@@ -13,8 +14,16 @@ public abstract class Shape {
 	public int width, height;
 	public double rotation;
 	public Sprite sprite;
+	public Animation animation;
+	
+	public boolean animated;
+	public int animIndex = 0;
 	
 	public Shape(int x, int y, int width, int height, double rotation, Sprite sprite) {
+		
+	}
+	
+	public Shape(int x, int y, int width, int height, double rotation, Animation animation) {
 		
 	}
 
@@ -69,6 +78,14 @@ public abstract class Shape {
 		this.sprite = sprite;
 	}
 	
+	public Animation getAnimation() {
+		return animation;
+	}
+	
+	public void setAnimation(Animation animation) {
+		this.animation = animation;
+	}
+	
 	public static BufferedImage rotate(BufferedImage image, double angle) {
 	    AffineTransform at = AffineTransform.getTranslateInstance(0, 0);
 	    at.rotate(Math.toRadians(angle));
@@ -91,6 +108,10 @@ public abstract class Shape {
 	    g2d.dispose();
 	
 	    return dimg;
+	}
+	
+	public boolean isAnimated() {
+		return animated;
 	}
 	
 }
