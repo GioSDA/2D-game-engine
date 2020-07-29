@@ -14,4 +14,8 @@ public class Animation {
 		return (sprites.get(i));
 	}
 	
+	public List<Sprite> getSprites() {
+		return sprites;
+	}
+	
 }
