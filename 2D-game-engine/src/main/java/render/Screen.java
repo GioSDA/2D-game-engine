@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 
 import main.java.shape.Rectangle;
 import main.java.shape.Shape;
+import main.java.sprite.Sprite;
 
 public class Screen extends Canvas {
 
@@ -64,10 +65,10 @@ public class Screen extends Canvas {
 	
 	public void setPixels() {
 		for (Shape shape : shapes) {
-			for (int j = 0; j < shape.getTexture().getHeight(); j++) {
-				for (int l = 0; l < shape.getTexture().getWidth(); l++) {
+			for (int j = 0; j < shape.getSprite().getTexture().getHeight(); j++) {
+				for (int l = 0; l < shape.getSprite().getTexture().getWidth(); l++) {
 					if (l + shape.getX() < inBetween.getWidth() && j + shape.getY() < inBetween.getHeight() && j*getWidth() + l < pixels.length)
-						if (shape.getTexture().getRGB(l, j) != -65281) pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = shape.getTexture().getRGB(l, j);
+						if (shape.getSprite().getTexture().getRGB(l, j) != -65281) pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = shape.getSprite().getTexture().getRGB(l, j);
 						else pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = 0;
 				}
 			}
@@ -94,18 +95,18 @@ public class Screen extends Canvas {
 		bs.show();
 	}
 	
-	public void addRect(int x, int y, int width, int height, double rotation, BufferedImage texture) {
-		shapes.add(new Rectangle(x, y, width, height, rotation, Shape.rotate(Shape.resize(texture, width, height), rotation)));
+	public void Rect(int x, int y, int width, int height, double rotation, Sprite sprite) {
+		shapes.add(new Rectangle(x, y, width, height, rotation, new Sprite(Shape.rotate(Shape.resize(sprite.getTexture(), width, height), rotation))));
 	}
 	
-	public void addRect(int x, int y, int width, int height, double rotation, Color colour) {
+	public void Rect(int x, int y, int width, int height, double rotation, Color colour) {
 		BufferedImage b = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2d = b.createGraphics();
 		g2d.setColor(colour);
 		g2d.fillRect(0, 0, b.getWidth(), b.getHeight());
 		g2d.dispose();
 		
-		shapes.add(new Rectangle(x, y, width, height, rotation, b));
+		shapes.add(new Rectangle(x, y, width, height, rotation, new Sprite(b)));
 	}
 	
 	public void removeShape(int index) {

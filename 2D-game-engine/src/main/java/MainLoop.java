@@ -12,6 +12,7 @@ import main.java.input.KeyboardInput;
 import main.java.input.MouseInput;
 import main.java.render.Screen;
 import main.java.shape.RenderMode;
+import main.java.sprite.Sprite;
 
 public class MainLoop {
 	public static int tps = 60;
@@ -19,7 +20,7 @@ public class MainLoop {
 	
 //	public static double i = 0;
 	
-	public static RenderMode renderMode;
+	public static RenderMode renderMode = RenderMode.LU_CORNER;
 	
 	public File file = new File(MainLoop.class.getClassLoader().getResource("main/res/images/GameIcon.png").getFile());
 	
@@ -37,8 +38,8 @@ public class MainLoop {
 			screen.setFocusable(true);
 			screen.requestFocus();
 			screen.enableFrame();
-			screen.addRect(0, 0, 400, 400, 0, ImageIO.read(mainloop.file));
-			screen.addRect(150, 150, 100, 100, 0, Color.RED);
+			screen.Rect(0, 0, 400, 400, 0, new Sprite(ImageIO.read(mainloop.file)));
+			screen.Rect(150, 150, 100, 100, 0, Color.RED);
 			
 			long timer = System.currentTimeMillis();
 			int frames = 0;
@@ -83,8 +84,7 @@ public class MainLoop {
 	}
 	
 	public static void tick() {
-//		i += 0.05;
-//		Screen.shapes.get(0).setRot(i);
+		
 	}
 	
 }

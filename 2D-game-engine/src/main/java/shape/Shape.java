@@ -5,14 +5,16 @@ import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
+import main.java.sprite.Sprite;
+
 public abstract class Shape {
 
 	public int x, y;
 	public int width, height;
 	public double rotation;
-	public BufferedImage texture;
+	public Sprite sprite;
 	
-	public Shape(int x, int y, int width, int height, double rotation, BufferedImage texture) {
+	public Shape(int x, int y, int width, int height, double rotation, Sprite sprite) {
 		
 	}
 
@@ -38,7 +40,7 @@ public abstract class Shape {
 
 	public void setWidth(int width) {
 		this.width = width;
-		setTexture(resize(getTexture(), width, getHeight()));
+		setSprite(new Sprite(resize(getSprite().getTexture(), width, getHeight())));
 	}
 
 	public int getHeight() {
@@ -47,7 +49,7 @@ public abstract class Shape {
 
 	public void setHeight(int height) {
 		this.height = height;
-		setTexture(resize(getTexture(), getWidth(), height));
+		setSprite(new Sprite(resize(getSprite().getTexture(), getWidth(), height)));
 	}
 	
 	public double getRot() {
@@ -56,15 +58,15 @@ public abstract class Shape {
 
 	public void setRot(double rotation) {
 		this.rotation = rotation;
-		setTexture(rotate(getTexture(), rotation));
+		setSprite(new Sprite(rotate(getSprite().getTexture(), rotation)));
 	}
 
-	public BufferedImage getTexture() {
-		return texture;
+	public Sprite getSprite() {
+		return sprite;
 	}
 
-	public void setTexture(BufferedImage texture) {
-		this.texture = texture;
+	public void setSprite(Sprite sprite) {
+		this.sprite = sprite;
 	}
 	
 	public static BufferedImage rotate(BufferedImage image, double angle) {
