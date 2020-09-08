@@ -18,15 +18,20 @@ import main.java.shape.Rectangle;
 import main.java.shape.Shape;
 import main.java.sprite.Sprite;
 
+/** Screen to render shapes to. */
 public class Screen extends Canvas {
 
 	private static final long serialVersionUID = -7004570169397651722L;
 
+	/** the JFrame. */
 	public JFrame frame;
+	
+	/** List of pixels that will be drawn to screen. */
 	public int[] pixels;
 	
 	public BufferedImage inBetween;
 	
+	/** List of shapes. */
 	public static List<Shape> shapes = new ArrayList<Shape>();
 	
 	public Screen(JFrame frame, Dimension dimension) throws IOException {
@@ -46,23 +51,27 @@ public class Screen extends Canvas {
 	}
 	
 	
-	
+	/** Sets size of Frame. */
 	public void setSize(Dimension dimension) {
 		frame.setPreferredSize(dimension);
 	}
 	
+	/**  Sets the icon image of the frame.  */
 	public void setIcon(Image icon) {
 		frame.setIconImage(icon);
 	}
 	
+	/** Sets the title of the frame. **/
 	public void setTitle(String title) {
 		frame.setTitle(title);
 	}
 	
+	/** Enables the frame. **/
 	public void enableFrame() {
 		frame.setVisible(true);
 	}
 	
+	/** Sets the pixels on the frame to specified values. */
 	public void setPixels() {
 		for (Shape shape : shapes) {
 			if (shape.isAnimated()) {
@@ -94,6 +103,7 @@ public class Screen extends Canvas {
 		}
 	}
 	
+	/** Renders the shapes to the frame. */
 	public void render() {
 		
 		BufferStrategy bs = getBufferStrategy();
@@ -110,10 +120,28 @@ public class Screen extends Canvas {
 		bs.show();
 	}
 	
+	/**
+	 * Draws a rectangle to the screen with a sprite.
+	 * @param x the x position of the rect.
+	 * @param y the y position of the rect.
+	 * @param width the width of the rect.
+	 * @param height the height of the rect.
+	 * @param rotation The rotation of the rect.
+	 * @param sprite The sprite that will be rendered.
+	 */
 	public void Rect(int x, int y, int width, int height, double rotation, Sprite sprite) {
 		shapes.add(new Rectangle(x, y, width, height, rotation, new Sprite(Shape.rotate(Shape.resize(sprite.getTexture(), width, height), rotation))));
 	}
 	
+	/**
+	 * Draws a Rectangle to the screen with a specified colour.
+	 * @param x the x position of the rect.
+	 * @param y the y position of the rect.
+	 * @param width the width of the rect.
+	 * @param height the height of the rect.
+	 * @param rotation The rotation of the rect.
+	 * @param colour The color of the rect.
+	 */
 	public void Rect(int x, int y, int width, int height, double rotation, Color colour) {
 		BufferedImage b = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2d = b.createGraphics();
@@ -124,14 +152,30 @@ public class Screen extends Canvas {
 		shapes.add(new Rectangle(x, y, width, height, rotation, new Sprite(b)));
 	}
 	
+	/**
+	 * Removes a shape with the curent index.
+	 * @param index The index of the shape to be removed.
+	 */
 	public void removeShape(int index) {
 		shapes.remove(index);
 	}
 	
+	/**
+	 * 
+	 * @param index The index to be changed.
+	 * @param newValue The value to change the new index to.
+	 * @param list to do the changing in.
+	 */
 	public void changeItem(int index, int newValue, List<Integer> list) {
 		list.set(index, newValue);
 	}
 	
+	/**
+	 * 
+	 * @param index The index to be changed.
+	 * @param newValue The value to change the new index to.
+	 * @param list to do the changing in.
+	 */
 	public void changeItem(int index, Image newValue, List<Image> list) {
 		list.set(index, newValue);
 	}

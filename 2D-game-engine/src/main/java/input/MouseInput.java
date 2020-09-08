@@ -3,8 +3,10 @@ package main.java.input;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/** Keeps track of mouse input. */
 public class MouseInput implements MouseListener {
 
+	/** Current mouse buttons being pressed. */
 	public static boolean[] mouseButtons = new boolean[15];
 	
 	@Override

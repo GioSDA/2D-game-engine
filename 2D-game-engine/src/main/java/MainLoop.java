@@ -15,18 +15,24 @@ import main.java.shape.RenderMode;
 import main.java.sprite.Sprite;
 
 public class MainLoop {
+	/** Ticks per second. */
 	public static int tps = 60;
+	/** Frames per second. */
 	public static int fps = 60;
 	
 //	public static double i = 0;
 	
+	/** The way shapes are drawn to the screen. */
 	public static RenderMode renderMode = RenderMode.LU_CORNER;
 	
 	public File file = new File(MainLoop.class.getClassLoader().getResource("main/res/images/GameIcon.png").getFile());
 	
+	/** Keyboard Input. */
 	public static KeyboardInput key = new KeyboardInput();
+	/** Mouse Input. */
 	public static MouseInput mouse = new MouseInput();
 	
+	/** Screen. */
 	public static Screen screen;
 	
 	public static void main(String[] args) {
@@ -83,6 +89,7 @@ public class MainLoop {
 		}
 	}
 	
+	/** Called every tick. */
 	public static void tick() {
 		
 	}

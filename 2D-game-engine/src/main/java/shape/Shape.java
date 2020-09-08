@@ -27,62 +27,80 @@ public abstract class Shape {
 		
 	}
 
+	/** Gets x position of a shape. */
 	public int getX() {
 		return x;
 	}
 
+	/** Sets x position of a shape. */
 	public void setX(int x) {
 		this.x = x;
 	}
 
+	/** Gets y position of a shape. */
 	public int getY() {
 		return y;
 	}
 
+	/** Sets y position of a shape. */
 	public void setY(int y) {
 		this.y = y;
 	}
 
+	/** Gets width of a shape. */
 	public int getWidth() {
 		return width;
 	}
 
+	/** Sets width of a shape. */
 	public void setWidth(int width) {
 		this.width = width;
 		setSprite(new Sprite(resize(getSprite().getTexture(), width, getHeight())));
 	}
 
+	/** Gets height of a shape. */
 	public int getHeight() {
 		return height;
 	}
 
+	/** Sets height of a shape. */
 	public void setHeight(int height) {
 		this.height = height;
 		setSprite(new Sprite(resize(getSprite().getTexture(), getWidth(), height)));
 	}
 	
+	/** Gets rotation of a shape. */
 	public double getRot() {
 		return rotation;
 	}
 
+	/** Sets rotation of a shape. */
 	public void setRot(double rotation) {
 		this.rotation = rotation;
 		setSprite(new Sprite(rotate(getSprite().getTexture(), rotation)));
 	}
 
+	/** Gets sprite of a shape if present. */
 	public Sprite getSprite() {
+		if (animated) return null;
 		return sprite;
 	}
 
+	/** Sets sprite of a shape if not animated. */
 	public void setSprite(Sprite sprite) {
+		if (animated) return;
 		this.sprite = sprite;
 	}
 	
+	/** Gets animation of a shape if present. */
 	public Animation getAnimation() {
+		if (!animated) return null;
 		return animation;
 	}
 	
+	/** Sets sprite of a shape if animated. */
 	public void setAnimation(Animation animation) {
+		if (!animated) return;
 		this.animation = animation;
 	}
 	
@@ -110,6 +128,7 @@ public abstract class Shape {
 	    return dimg;
 	}
 	
+	/** Returns whether the shape is animated or not. */
 	public boolean isAnimated() {
 		return animated;
 	}
