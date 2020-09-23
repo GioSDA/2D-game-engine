@@ -74,7 +74,7 @@ public class Screen extends Canvas {
 	/** Sets the pixels on the frame to specified values. */
 	public void setPixels() {
 		for (Shape shape : shapes) {
-			if (shape.isAnimated()) {
+			if (!shape.isAnimated()) {
 				
 				for (int j = 0; j < shape.getSprite().getTexture().getHeight(); j++) {
 					for (int l = 0; l < shape.getSprite().getTexture().getWidth(); l++) {

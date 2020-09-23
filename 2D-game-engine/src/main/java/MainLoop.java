@@ -39,11 +39,7 @@ public class MainLoop {
 		try {
 			MainLoop mainloop = new MainLoop();
 			screen = new Screen(new JFrame(), new Dimension(400, 400));
-			screen.addKeyListener(key);
-			screen.addMouseListener(mouse);
-			screen.setFocusable(true);
-			screen.requestFocus();
-			screen.enableFrame();
+			setUpScreen();
 			screen.Rect(0, 0, 400, 400, 0, new Sprite(ImageIO.read(mainloop.file)));
 			screen.Rect(150, 150, 100, 100, 0, Color.RED);
 			
@@ -92,6 +88,14 @@ public class MainLoop {
 	/** Called every tick. */
 	public static void tick() {
 		
+	}
+	
+	public static void setUpScreen() {
+		screen.addKeyListener(key);
+		screen.addMouseListener(mouse);
+		screen.setFocusable(true);
+		screen.requestFocus();
+		screen.enableFrame();
 	}
 	
 }
