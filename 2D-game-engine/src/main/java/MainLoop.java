@@ -13,6 +13,7 @@ import main.java.input.MouseInput;
 import main.java.render.Screen;
 import main.java.shape.RenderMode;
 import main.java.sprite.Sprite;
+import main.java.sprite.SpriteMap;
 
 public class MainLoop {
 	/** Ticks per second. */
@@ -25,7 +26,7 @@ public class MainLoop {
 	/** The way shapes are drawn to the screen. */
 	public static RenderMode renderMode = RenderMode.LU_CORNER;
 	
-	public File file = new File(MainLoop.class.getClassLoader().getResource("main/res/images/GameIcon.png").getFile());
+	public static File file = new File(MainLoop.class.getClassLoader().getResource("main/res/images/GameIcon.png").getFile());
 	
 	/** Keyboard Input. */
 	public static KeyboardInput key = new KeyboardInput();
@@ -37,10 +38,9 @@ public class MainLoop {
 	
 	public static void main(String[] args) {
 		try {
-			MainLoop mainloop = new MainLoop();
 			screen = new Screen(new JFrame(), new Dimension(400, 400));
 			setUpScreen();
-			screen.Rect(0, 0, 400, 400, 0, new Sprite(ImageIO.read(mainloop.file)));
+			screen.Rect(0, 0, 400, 400, 0, new Sprite(ImageIO.read(file)));
 			screen.Rect(150, 150, 100, 100, 0, Color.RED);
 			
 			long timer = System.currentTimeMillis();

@@ -13,7 +13,7 @@ public class SpriteMap {
 		this.height = height;
 	}
 	
-	/** Retruns the sprite at a specific position of the spritemap. */
+	/** Returns the sprite at a specific position of the spritemap. */
 	public Sprite getSprite(int x, int y) {
 		int sx = x*width;
 		int sy = y*width;
