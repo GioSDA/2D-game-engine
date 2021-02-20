@@ -1,87 +1,71 @@
 package main.java;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 
 import main.java.input.KeyboardInput;
 import main.java.input.MouseInput;
 import main.java.render.Screen;
 import main.java.shape.RenderMode;
-import main.java.sprite.Sprite;
-import main.java.sprite.SpriteMap;
 
 public class MainLoop {
 	/** Ticks per second. */
-	public static int tps = 60;
+	public static int tps;
 	/** Frames per second. */
-	public static int fps = 60;
+	public static int fps;
 	
 //	public static double i = 0;
 	
 	/** The way shapes are drawn to the screen. */
-	public static RenderMode renderMode = RenderMode.LU_CORNER;
+	public static RenderMode renderMode;
 	
 	public static File file = new File(MainLoop.class.getClassLoader().getResource("main/res/images/GameIcon.png").getFile());
 	
 	/** Keyboard Input. */
-	public static KeyboardInput key = new KeyboardInput();
+	public static KeyboardInput key;
 	/** Mouse Input. */
-	public static MouseInput mouse = new MouseInput();
+	public static MouseInput mouse;
 	
 	/** Screen. */
 	public static Screen screen;
 	
-	public static void main(String[] args) {
-		try {
-			screen = new Screen(new JFrame(), new Dimension(400, 400));
-			setUpScreen();
-			screen.Rect(0, 0, 400, 400, 0, new Sprite(ImageIO.read(file)));
-			screen.Rect(150, 150, 100, 100, 0, Color.RED);
+	/** Main Method */
+	public static void main() {
+		setUpScreen();
+		
+		long timer = System.currentTimeMillis();
+		int frames = 0;
+		int ticks = 0;
+		
+		long last = System.nanoTime();
+		double e = 0;
+		double f = 0;
+		
+		while (true) {
+			long now = System.nanoTime();
+			e += (now - last) / (1000000000.0 / tps);
+			f += (now - last) / (1000000000.0 / fps);
+			last = now;
 			
-			long timer = System.currentTimeMillis();
-			int frames = 0;
-			int ticks = 0;
-			
-			long last = System.nanoTime();
-			double e = 0;
-			double f = 0;
-			
-			while (true) {
-				long now = System.nanoTime();
-				e += (now - last) / (1000000000.0 / tps);
-				f += (now - last) / (1000000000.0 / fps);
-				last = now;
-				
-				while (e >= 1) { 
-					tick();
-					e--; 
-					ticks++;
-				}
-				
-				while (f >= 1) { 
-					screen.render();
-					f--; 
-					frames++;
-				}
-
-				if (System.currentTimeMillis() - timer >= 1000) { 
-					System.out.println(ticks + ", " + frames);
-					timer += 1000;
-					frames = 0;
-					ticks = 0;
-				}
-				
-				screen.render();
+			while (e >= 1) {
+				tick();
+				e--; 
+				ticks++;
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("Image file could not be read.");
-			System.exit(0);
+			
+			while (f >= 1) { 
+				screen.render();
+				f--; 
+				frames++;
+			}
+			
+			if (System.currentTimeMillis() - timer >= 1000) { 
+				System.out.println(ticks + ", " + frames);
+				timer += 1000;
+				frames = 0;
+				ticks = 0;
+			}
+			
+			screen.render();
 		}
 	}
 	

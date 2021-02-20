@@ -1,5 +1,6 @@
 package main.java.shape;
 
+import main.java.Main;
 import main.java.MainLoop;
 import main.java.sprite.Animation;
 import main.java.sprite.Sprite;
@@ -9,7 +10,7 @@ public class Rectangle extends Shape {
 	public Rectangle(int x, int y, int width, int height, double rotation, Sprite sprite) {
 		super(x, y, width, height, rotation, sprite);
 		this.animated = false;
-		switch (MainLoop.renderMode) {
+		switch (Main.renderMode) {
 		case LU_CORNER:
 			this.x = x;
 			this.y = y;
