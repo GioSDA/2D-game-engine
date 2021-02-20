@@ -1,7 +1,5 @@
 package main.java;
 
-import java.io.File;
-
 import main.java.input.KeyboardInput;
 import main.java.input.MouseInput;
 import main.java.render.Screen;
@@ -9,24 +7,23 @@ import main.java.shape.RenderMode;
 
 public class MainLoop {
 	/** Ticks per second. */
-	public static int tps;
+	public static int tps = 60;
 	/** Frames per second. */
-	public static int fps;
-	
-//	public static double i = 0;
-	
+	public static int fps = 60;
+		
 	/** The way shapes are drawn to the screen. */
-	public static RenderMode renderMode;
-	
-	public static File file = new File(MainLoop.class.getClassLoader().getResource("main/res/images/GameIcon.png").getFile());
-	
+	public static RenderMode renderMode = RenderMode.LU_CORNER;
+		
 	/** Keyboard Input. */
-	public static KeyboardInput key;
+	public static KeyboardInput key = new KeyboardInput();
 	/** Mouse Input. */
-	public static MouseInput mouse;
+	public static MouseInput mouse = new MouseInput();
 	
 	/** Screen. */
 	public static Screen screen;
+	
+	/** Toggles debugmode. */
+	public static boolean debugMode = false;
 	
 	/** Main Method */
 	public static void main() {
@@ -59,7 +56,7 @@ public class MainLoop {
 			}
 			
 			if (System.currentTimeMillis() - timer >= 1000) { 
-				System.out.println(ticks + ", " + frames);
+				if (debugMode) System.out.println(ticks + ", " + frames);
 				timer += 1000;
 				frames = 0;
 				ticks = 0;
