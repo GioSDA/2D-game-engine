@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 
 import main.java.shape.Rectangle;
 import main.java.shape.Shape;
+import main.java.sprite.Animation;
 import main.java.sprite.Sprite;
 
 /** Screen to render shapes to. */
@@ -89,12 +90,12 @@ public class Screen extends Canvas {
 				for (int j = 0; j < shape.getAnimation().getSprite(shape.animIndex).getTexture().getHeight(); j++) {
 					for (int l = 0; l < shape.getAnimation().getSprite(shape.animIndex).getTexture().getWidth(); l++) {
 						if (l + shape.getX() < inBetween.getWidth() && j + shape.getY() < inBetween.getHeight() && j*getWidth() + l < pixels.length)
-							if (shape.getSprite().getTexture().getRGB(l, j) != -65281) pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = shape.getSprite().getTexture().getRGB(l, j);
+							if (shape.getAnimation().getSprite(shape.animIndex).getTexture().getRGB(l, j) != -65281) pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = shape.getAnimation().getSprite(shape.animIndex).getTexture().getRGB(l, j);
 							else pixels[(j + shape.getY()) * inBetween.getWidth() + l + shape.getX()] = 0;
 					}
 				}
 				
-				shape.animIndex = (shape.animIndex + 1 % shape.getAnimation().getSprites().size());
+				shape.animIndex = ((shape.animIndex + 1) % shape.getAnimation().getSprites().size());
 			}
 		}
 		
@@ -124,13 +125,39 @@ public class Screen extends Canvas {
 	 * Draws a rectangle to the screen with a sprite.
 	 * @param x the x position of the rect.
 	 * @param y the y position of the rect.
+	 * @param sprite The sprite that will be rendered.
+	 */
+	public void Rect(int x, int y, Sprite sprite) {
+		shapes.add(new Rectangle(x, y, sprite.getTexture().getWidth(), sprite.getTexture().getHeight(), 0, sprite));
+	}
+	
+	/**
+	 * Draws a rectangle to the screen with an animation.
+	 * @param x the x position of the rect.
+	 * @param y the y position of the rect.
+	 * @param sprite The sprite that will be rendered.
+	 */
+	public void Rect(int x, int y, Animation animation) {
+		shapes.add(new Rectangle(x, y, animation.getSprite(0).getTexture().getWidth(), animation.getSprite(0).getTexture().getHeight(), 0, animation));
+	}
+	
+	/**
+	 * Draws a Rectangle to the screen with a specified colour.
+	 * @param x the x position of the rect.
+	 * @param y the y position of the rect.
 	 * @param width the width of the rect.
 	 * @param height the height of the rect.
 	 * @param rotation The rotation of the rect.
-	 * @param sprite The sprite that will be rendered.
+	 * @param colour The color of the rect.
 	 */
-	public void Rect(int x, int y, int width, int height, double rotation, Sprite sprite) {
-		shapes.add(new Rectangle(x, y, width, height, rotation, new Sprite(Shape.rotate(Shape.resize(sprite.getTexture(), width, height), rotation))));
+	public void Rect(int x, int y, int width, int height, Color colour) {
+		BufferedImage b = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g2d = b.createGraphics();
+		g2d.setColor(colour);
+		g2d.fillRect(0, 0, b.getWidth(), b.getHeight());
+		g2d.dispose();
+		
+		shapes.add(new Rectangle(x, y, width, height, 0, new Sprite(b)));
 	}
 	
 	/**

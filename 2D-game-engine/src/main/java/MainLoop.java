@@ -37,6 +37,8 @@ public class MainLoop {
 		double e = 0;
 		double f = 0;
 		
+		screen.render();
+		
 		while (true) {
 			long now = System.nanoTime();
 			e += (now - last) / (1000000000.0 / tps);
@@ -56,13 +58,11 @@ public class MainLoop {
 			}
 			
 			if (System.currentTimeMillis() - timer >= 1000) { 
-				if (debugMode) System.out.println(ticks + ", " + frames);
+				if (debugMode) System.out.println("fps: " + frames + ", tps: " + ticks);
 				timer += 1000;
 				frames = 0;
 				ticks = 0;
 			}
-			
-			screen.render();
 		}
 	}
 	

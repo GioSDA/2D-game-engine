@@ -14,52 +14,32 @@ public class Rectangle extends Shape {
 		case LU_CORNER:
 			this.x = x;
 			this.y = y;
-			this.width = width;
-			this.height = height;
-			this.rotation = rotation;
-			this.sprite = sprite;
 			break;
 		case RU_CORNER:
 			this.x = x-width;
 			this.y = y;
-			this.width = width;
-			this.height = height;
-			this.rotation = rotation;
-			this.sprite = sprite;
 			break;
 		case LD_CORNER:
 			this.x = x;
 			this.y = y-height;
-			this.width = width;
-			this.height = height;
-			this.rotation = rotation;
-			this.sprite = sprite;
 			break;
 		case RD_CORNER:
 			this.x = x-width;
 			this.y = y-height;
-			this.width = width;
-			this.height = height;
-			this.rotation = rotation;
-			this.sprite = sprite;
 			break;
 		case CENTER:
 			this.x = x-(width/2);
 			this.y = y-(height/2);
-			this.width = width;
-			this.height = height;
-			this.rotation = rotation;
-			this.sprite = sprite;
 			break;
 		default:
 			this.x = x;
 			this.y = y;
-			this.width = width;
-			this.height = height;
-			this.rotation = rotation;
-			this.sprite = sprite;
 			break;
 		}
+
+		this.width = width;
+		this.height = height;
+		this.sprite = sprite;
 	}
 	
 	public Rectangle(int x, int y, int width, int height, double rotation, Animation animation) {
@@ -69,52 +49,33 @@ public class Rectangle extends Shape {
 		case LU_CORNER:
 			this.x = x;
 			this.y = y;
-			this.width = width;
-			this.height = height;
-			this.rotation = rotation;
-			this.animation = animation;
 			break;
 		case RU_CORNER:
 			this.x = x-width;
 			this.y = y;
-			this.width = width;
-			this.height = height;
-			this.rotation = rotation;
-			this.animation = animation;
+			
 			break;
 		case LD_CORNER:
 			this.x = x;
 			this.y = y-height;
-			this.width = width;
-			this.height = height;
-			this.rotation = rotation;
-			this.animation = animation;
 			break;
 		case RD_CORNER:
 			this.x = x-width;
 			this.y = y-height;
-			this.width = width;
-			this.height = height;
-			this.rotation = rotation;
-			this.animation = animation;
 			break;
 		case CENTER:
 			this.x = x-(width/2);
 			this.y = y-(height/2);
-			this.width = width;
-			this.height = height;
-			this.rotation = rotation;
-			this.animation = animation;
 			break;
 		default:
 			this.x = x;
 			this.y = y;
-			this.width = width;
-			this.height = height;
-			this.rotation = rotation;
-			this.animation = animation;
 			break;
 		}
+		
+		this.width = width;
+		this.height = height;
+		this.animation = animation;
 	}
 	
 }

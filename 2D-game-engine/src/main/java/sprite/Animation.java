@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Animation {
 
-	List<Sprite> sprites;
+	public List<Sprite> sprites;
 	
 	public Animation(List<Sprite> sprites) {
 		this.sprites = sprites;

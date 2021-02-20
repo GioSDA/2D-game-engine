@@ -2,7 +2,6 @@ package main.java.shape;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 import main.java.sprite.Animation;
@@ -12,7 +11,6 @@ public abstract class Shape {
 
 	public int x, y;
 	public int width, height;
-	public double rotation;
 	public Sprite sprite;
 	public Animation animation;
 	
@@ -68,17 +66,6 @@ public abstract class Shape {
 		this.height = height;
 		setSprite(new Sprite(resize(getSprite().getTexture(), getWidth(), height)));
 	}
-	
-	/** Gets rotation of a shape. */
-	public double getRot() {
-		return rotation;
-	}
-
-	/** Sets rotation of a shape. */
-	public void setRot(double rotation) {
-		this.rotation = rotation;
-		setSprite(new Sprite(rotate(getSprite().getTexture(), rotation)));
-	}
 
 	/** Gets sprite of a shape if present. */
 	public Sprite getSprite() {
@@ -103,19 +90,6 @@ public abstract class Shape {
 		if (!animated) return;
 		this.animation = animation;
 	}
-	
-	public static BufferedImage rotate(BufferedImage image, double angle) {
-	    AffineTransform at = AffineTransform.getTranslateInstance(0, 0);
-	    at.rotate(Math.toRadians(angle));
-	    BufferedImage dimg = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
-	    
-	    Graphics2D g2d = dimg.createGraphics();
-	    
-	    g2d.drawImage(image, at, null);
-	    g2d.dispose();
-	    
-	    return dimg;
-	  }
 
 	public static BufferedImage resize(BufferedImage img, int width, int height) {
 		Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);

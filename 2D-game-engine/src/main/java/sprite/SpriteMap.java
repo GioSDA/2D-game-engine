@@ -15,8 +15,8 @@ public class SpriteMap {
 	
 	/** Returns the sprite at a specific position of the spritemap. */
 	public Sprite getSprite(int x, int y) {
-		int sx = x*width;
-		int sy = y*width;
+		int sx = x*(img.getWidth()/width);
+		int sy = y*(img.getHeight()/height);
 		
 		return new Sprite(img.getSubimage(sx, sy, img.getWidth()/width, img.getHeight()/height));
 	}
