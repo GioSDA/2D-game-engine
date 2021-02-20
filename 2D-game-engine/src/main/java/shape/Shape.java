@@ -10,7 +10,6 @@ import main.java.sprite.Sprite;
 public abstract class Shape {
 
 	public int x, y;
-	public int width, height;
 	public Sprite sprite;
 	public Animation animation;
 	
@@ -47,23 +46,21 @@ public abstract class Shape {
 
 	/** Gets width of a shape. */
 	public int getWidth() {
-		return width;
+		return this.sprite.getTexture().getWidth();
 	}
 
 	/** Sets width of a shape. */
 	public void setWidth(int width) {
-		this.width = width;
 		setSprite(new Sprite(resize(getSprite().getTexture(), width, getHeight())));
 	}
 
 	/** Gets height of a shape. */
 	public int getHeight() {
-		return height;
+		return this.sprite.getTexture().getWidth();
 	}
 
 	/** Sets height of a shape. */
 	public void setHeight(int height) {
-		this.height = height;
 		setSprite(new Sprite(resize(getSprite().getTexture(), getWidth(), height)));
 	}
 

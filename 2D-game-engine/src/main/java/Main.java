@@ -22,7 +22,7 @@ public class Main extends MainLoop {
 	
 	public static void main(String[] args) throws HeadlessException, IOException {
 		fps = 60;
-//		debugMode = true;
+		debugMode = true;
 		
 		screen = new Screen(new JFrame(), new Dimension(400, 400));
 		

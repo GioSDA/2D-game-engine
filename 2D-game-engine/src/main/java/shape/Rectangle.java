@@ -37,8 +37,6 @@ public class Rectangle extends Shape {
 			break;
 		}
 
-		this.width = width;
-		this.height = height;
 		this.sprite = sprite;
 	}
 	
@@ -73,8 +71,6 @@ public class Rectangle extends Shape {
 			break;
 		}
 		
-		this.width = width;
-		this.height = height;
 		this.animation = animation;
 	}
 	
