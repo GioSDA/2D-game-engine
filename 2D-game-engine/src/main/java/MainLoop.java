@@ -22,7 +22,7 @@ public class MainLoop {
 	/** Screen. */
 	public static Screen screen;
 	
-	/** Toggles debugmode. */
+	/** Toggles debug mode. */
 	public static boolean debugMode = false;
 	
 	/** Main Method */

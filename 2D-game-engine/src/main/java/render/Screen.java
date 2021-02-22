@@ -1,23 +1,17 @@
 package main.java.render;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
+import main.java.shape.Rectangle;
+import main.java.shape.Shape;
+import main.java.sprite.Animation;
+import main.java.sprite.Sprite;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JFrame;
-
-import main.java.shape.Rectangle;
-import main.java.shape.Shape;
-import main.java.sprite.Animation;
-import main.java.sprite.Sprite;
 
 /** Screen to render shapes to. */
 public class Screen extends Canvas {
@@ -33,9 +27,9 @@ public class Screen extends Canvas {
 	public BufferedImage inBetween;
 	
 	/** List of shapes. */
-	public static List<Shape> shapes = new ArrayList<Shape>();
+	public static List<Shape> shapes = new ArrayList<>();
 	
-	public Screen(JFrame frame, Dimension dimension) throws IOException {
+	public Screen(JFrame frame, Dimension dimension) {
 		this.frame = frame;
 		frame.setPreferredSize(dimension);
 		frame.getContentPane().add(this);
@@ -135,7 +129,6 @@ public class Screen extends Canvas {
 	 * Draws a rectangle to the screen with an animation.
 	 * @param x the x position of the rect.
 	 * @param y the y position of the rect.
-	 * @param sprite The sprite that will be rendered.
 	 */
 	public void Rect(int x, int y, Animation animation) {
 		shapes.add(new Rectangle(x, y, animation.getSprite(0).getTexture().getWidth(), animation.getSprite(0).getTexture().getHeight(), 0, animation));
@@ -147,7 +140,6 @@ public class Screen extends Canvas {
 	 * @param y the y position of the rect.
 	 * @param width the width of the rect.
 	 * @param height the height of the rect.
-	 * @param rotation The rotation of the rect.
 	 * @param colour The color of the rect.
 	 */
 	public void Rect(int x, int y, int width, int height, Color colour) {

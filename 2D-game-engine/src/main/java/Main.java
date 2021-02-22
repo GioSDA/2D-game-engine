@@ -1,19 +1,16 @@
 package main.java;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.HeadlessException;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-
 import main.java.render.Screen;
 import main.java.sprite.Animation;
 import main.java.sprite.Sprite;
 import main.java.sprite.SpriteMap;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main extends MainLoop {
 	
@@ -38,7 +35,7 @@ public class Main extends MainLoop {
 		screen.Rect(239, 239, sm.getSprite(1, 1));
 		
 		//Animation test
-		Animation anim = new Animation(new ArrayList<Sprite>());
+		Animation anim = new Animation(new ArrayList<>());
 		anim.getSprites().add(new Sprite(ImageIO.read(file)));
 		anim.getSprites().add(new Sprite(ImageIO.read(file2)));
 				

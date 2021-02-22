@@ -1,11 +1,10 @@
 package main.java.shape;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-
 import main.java.sprite.Animation;
 import main.java.sprite.Sprite;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public abstract class Shape {
 
