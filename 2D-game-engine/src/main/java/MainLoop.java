@@ -15,9 +15,9 @@ public class MainLoop {
 	public static RenderMode renderMode = RenderMode.LU_CORNER;
 		
 	/** Keyboard Input. */
-	public static KeyboardInput key = new KeyboardInput();
+	public static final KeyboardInput key = new KeyboardInput();
 	/** Mouse Input. */
-	public static MouseInput mouse = new MouseInput();
+	public static final MouseInput mouse = new MouseInput();
 	
 	/** Screen. */
 	public static Screen screen;

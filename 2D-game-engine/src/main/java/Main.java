@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class Main extends MainLoop {
 	
-	public static File file = new File(Main.class.getClassLoader().getResource("main/res/images/GameIcon.png").getFile());
-	public static File file2 = new File(Main.class.getClassLoader().getResource("main/res/images/GameIconFlipped.png").getFile());
+	public static final File file = new File(Main.class.getClassLoader().getResource("main/res/images/GameIcon.png").getFile());
+	public static final File file2 = new File(Main.class.getClassLoader().getResource("main/res/images/GameIconFlipped.png").getFile());
 	
 	public static void main(String[] args) throws HeadlessException, IOException {
 		fps = 60;

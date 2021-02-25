@@ -11,10 +11,6 @@ public class Rectangle extends Shape {
 		super(x, y, width, height, rotation, sprite);
 		this.animated = false;
 		switch (Main.renderMode) {
-		case LU_CORNER:
-			this.x = x;
-			this.y = y;
-			break;
 		case RU_CORNER:
 			this.x = x-width;
 			this.y = y;
@@ -36,22 +32,16 @@ public class Rectangle extends Shape {
 			this.y = y;
 			break;
 		}
-
 		this.sprite = sprite;
 	}
 	
 	public Rectangle(int x, int y, int width, int height, double rotation, Animation animation) {
 		super(x, y, width, height, rotation, animation);
 		this.animated = true;
-		switch (MainLoop.renderMode) {
-		case LU_CORNER:
-			this.x = x;
-			this.y = y;
-			break;
+		switch (Main.renderMode) {
 		case RU_CORNER:
 			this.x = x-width;
 			this.y = y;
-			
 			break;
 		case LD_CORNER:
 			this.x = x;

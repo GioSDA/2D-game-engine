@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -172,7 +171,7 @@ public class Screen extends Canvas {
 	}
 	
 	/**
-	 * Removes a shape with the curent index.
+	 * Removes a shape with the current index.
 	 * @param index The index of the shape to be removed.
 	 */
 	public void removeShape(int index) {
