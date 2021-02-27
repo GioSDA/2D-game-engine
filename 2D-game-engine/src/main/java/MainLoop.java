@@ -45,12 +45,6 @@ public class MainLoop {
 			f += (now - last) / (1000000000.0 / fps);
 			last = now;
 			
-			while (e >= 1) {
-				tick();
-				e--; 
-				ticks++;
-			}
-			
 			while (f >= 1) { 
 				screen.render();
 				f--; 
@@ -64,11 +58,6 @@ public class MainLoop {
 				ticks = 0;
 			}
 		}
-	}
-	
-	/** Called every tick. */
-	public static void tick() {
-		
 	}
 	
 	public static void setUpScreen() {
