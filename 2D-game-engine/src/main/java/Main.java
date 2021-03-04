@@ -13,16 +13,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Main extends MainLoop {
+public class Main extends Game {
 	
-	public static final File file = new File(Objects.requireNonNull(Main.class.getClassLoader().getResource("main/res/images/GameIcon.png")).getFile());
-	public static final File file2 = new File(Objects.requireNonNull(Main.class.getClassLoader().getResource("main/res/images/GameIconFlipped.png")).getFile());
+	public final File file = new File(Objects.requireNonNull(Main.class.getClassLoader().getResource("main/res/images/GameIcon.png")).getFile());
+	public final File file2 = new File(Objects.requireNonNull(Main.class.getClassLoader().getResource("main/res/images/GameIconFlipped.png")).getFile());
 	
-	public static void main(String[] args) throws HeadlessException, IOException {
+	public Main() throws IOException {
 		fps = 60;
 		debugMode = true;
 		
-		screen = new Screen(new JFrame(), new Dimension(400, 400));
+		screen = new Screen(new JFrame(), new Dimension(400, 400), renderMode);
 		
 		//Rectangle tests
 		screen.Rect(0, 0, new Sprite(ImageIO.read(file)));
@@ -41,7 +41,20 @@ public class Main extends MainLoop {
 		anim.getSprites().add(new Sprite(ImageIO.read(file2)));
 				
 		screen.Rect(0, 200, anim);
-		main();
 	}
-	
+
+	@Override
+	public void tick() {
+		System.out.println("Tick Works!");
+	}
+
+	@Override
+	public void onStart() {
+
+	}
+
+	@Override
+	public void onStop() {
+
+	}
 }

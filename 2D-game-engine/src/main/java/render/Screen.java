@@ -1,6 +1,7 @@
 package main.java.render;
 
 import main.java.shape.Rectangle;
+import main.java.shape.RenderMode;
 import main.java.shape.Shape;
 import main.java.sprite.Animation;
 import main.java.sprite.Sprite;
@@ -22,13 +23,15 @@ public class Screen extends Canvas {
 	
 	/** List of pixels that will be drawn to screen. */
 	public int[] pixels;
-	
+
+	public static RenderMode rm;
+
 	public BufferedImage inBetween;
-	
+
 	/** List of shapes. */
 	public static List<Shape> shapes = new ArrayList<>();
 	
-	public Screen(JFrame frame, Dimension dimension) {
+	public Screen(JFrame frame, Dimension dimension, RenderMode rm) {
 		this.frame = frame;
 		frame.setPreferredSize(dimension);
 		frame.getContentPane().add(this);
@@ -39,12 +42,13 @@ public class Screen extends Canvas {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setFocusable(true);
 		frame.requestFocus();
-		
+
+		this.rm = rm;
+
 		pixels = new int[(int)dimension.getWidth()*(int)dimension.getHeight()];
 		inBetween = new BufferedImage((int)dimension.getWidth(), (int)dimension.getHeight(), BufferedImage.TYPE_INT_RGB);
 	}
-	
-	
+
 	/** Sets size of Frame. */
 	public void setSize(Dimension dimension) {
 		frame.setPreferredSize(dimension);
@@ -121,7 +125,7 @@ public class Screen extends Canvas {
 	 * @param sprite The sprite that will be rendered.
 	 */
 	public void Rect(int x, int y, Sprite sprite) {
-		shapes.add(new Rectangle(x, y, sprite.getTexture().getWidth(), sprite.getTexture().getHeight(), 0, sprite));
+		shapes.add(new Rectangle(x, y, sprite.getTexture().getWidth(), sprite.getTexture().getHeight(), 0, sprite, rm));
 	}
 	
 	/**
@@ -130,7 +134,7 @@ public class Screen extends Canvas {
 	 * @param y the y position of the rect.
 	 */
 	public void Rect(int x, int y, Animation animation) {
-		shapes.add(new Rectangle(x, y, animation.getSprite(0).getTexture().getWidth(), animation.getSprite(0).getTexture().getHeight(), 0, animation));
+		shapes.add(new Rectangle(x, y, animation.getSprite(0).getTexture().getWidth(), animation.getSprite(0).getTexture().getHeight(), 0, animation, rm));
 	}
 	
 	/**
@@ -148,7 +152,7 @@ public class Screen extends Canvas {
 		g2d.fillRect(0, 0, b.getWidth(), b.getHeight());
 		g2d.dispose();
 		
-		shapes.add(new Rectangle(x, y, width, height, 0, new Sprite(b)));
+		shapes.add(new Rectangle(x, y, width, height, 0, new Sprite(b), rm));
 	}
 	
 	/**
@@ -167,7 +171,7 @@ public class Screen extends Canvas {
 		g2d.fillRect(0, 0, b.getWidth(), b.getHeight());
 		g2d.dispose();
 		
-		shapes.add(new Rectangle(x, y, width, height, rotation, new Sprite(b)));
+		shapes.add(new Rectangle(x, y, width, height, rotation, new Sprite(b), rm));
 	}
 	
 	/**

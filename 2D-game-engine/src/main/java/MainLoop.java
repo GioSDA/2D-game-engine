@@ -1,34 +1,25 @@
 package main.java;
 
-import main.java.input.KeyboardInput;
-import main.java.input.MouseInput;
-import main.java.render.Screen;
-import main.java.shape.RenderMode;
+import java.io.IOException;
 
 public class MainLoop {
-	/** Ticks per second. */
-	public static int tps = 60;
-	/** Frames per second. */
-	public static int fps = 60;
-		
-	/** The way shapes are drawn to the screen. */
-	public static RenderMode renderMode = RenderMode.LU_CORNER;
-		
-	/** Keyboard Input. */
-	public static final KeyboardInput key = new KeyboardInput();
-	/** Mouse Input. */
-	public static final MouseInput mouse = new MouseInput();
-	
-	/** Screen. */
-	public static Screen screen;
-	
-	/** Toggles debug mode. */
-	public static boolean debugMode = false;
-	
-	/** Main Method */
-	public static void main() {
+
+	public static Main main = null;
+
+	static {
+		try {
+			main = new Main();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Main main = new Main();
+
 		setUpScreen();
-		
+		main.onStart();
+
 		long timer = System.currentTimeMillis();
 		int frames = 0;
 		int ticks = 0;
@@ -37,22 +28,28 @@ public class MainLoop {
 		double e = 0;
 		double f = 0;
 		
-		screen.render();
+		main.screen.render();
 		
 		while (true) {
 			long now = System.nanoTime();
-			e += (now - last) / (1000000000.0 / tps);
-			f += (now - last) / (1000000000.0 / fps);
+			e += (now - last) / (1000000000.0 / main.tps);
+			f += (now - last) / (1000000000.0 / main.fps);
 			last = now;
 			
 			while (f >= 1) { 
-				screen.render();
+				main.screen.render();
 				f--; 
 				frames++;
 			}
-			
+
+			while (e >= 1) {
+				main.tick();
+				e--;
+				ticks++;
+			}
+
 			if (System.currentTimeMillis() - timer >= 1000) { 
-				if (debugMode) System.out.println("fps: " + frames + ", tps: " + ticks);
+				if (main.debugMode) System.out.println("fps: " + frames + ", tps: " + ticks);
 				timer += 1000;
 				frames = 0;
 				ticks = 0;
@@ -61,11 +58,11 @@ public class MainLoop {
 	}
 	
 	public static void setUpScreen() {
-		screen.addKeyListener(key);
-		screen.addMouseListener(mouse);
-		screen.setFocusable(true);
-		screen.requestFocus();
-		screen.enableFrame();
+		main.screen.addKeyListener(main.key);
+		main.screen.addMouseListener(main.mouse);
+		main.screen.setFocusable(true);
+		main.screen.requestFocus();
+		main.screen.enableFrame();
 	}
-	
+
 }

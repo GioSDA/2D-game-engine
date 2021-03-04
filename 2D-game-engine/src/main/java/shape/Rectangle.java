@@ -1,16 +1,15 @@
 package main.java.shape;
 
 import main.java.Main;
-import main.java.MainLoop;
 import main.java.sprite.Animation;
 import main.java.sprite.Sprite;
 
 public class Rectangle extends Shape {
 	
-	public Rectangle(int x, int y, int width, int height, double rotation, Sprite sprite) {
+	public Rectangle(int x, int y, int width, int height, double rotation, Sprite sprite, RenderMode rm) {
 		super(x, y, width, height, rotation, sprite);
 		this.animated = false;
-		switch (Main.renderMode) {
+		switch (rm) {
 		case RU_CORNER:
 			this.x = x-width;
 			this.y = y;
@@ -35,10 +34,10 @@ public class Rectangle extends Shape {
 		this.sprite = sprite;
 	}
 	
-	public Rectangle(int x, int y, int width, int height, double rotation, Animation animation) {
+	public Rectangle(int x, int y, int width, int height, double rotation, Animation animation, RenderMode rm) {
 		super(x, y, width, height, rotation, animation);
 		this.animated = true;
-		switch (Main.renderMode) {
+		switch (rm) {
 		case RU_CORNER:
 			this.x = x-width;
 			this.y = y;
