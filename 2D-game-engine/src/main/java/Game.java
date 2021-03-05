@@ -4,13 +4,6 @@ import main.java.input.KeyboardInput;
 import main.java.input.MouseInput;
 import main.java.render.Screen;
 import main.java.shape.RenderMode;
-import main.java.shape.Shape;
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Game {
     /** Ticks per second. */

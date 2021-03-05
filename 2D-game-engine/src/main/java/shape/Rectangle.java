@@ -1,6 +1,5 @@
 package main.java.shape;
 
-import main.java.Main;
 import main.java.sprite.Animation;
 import main.java.sprite.Sprite;
 

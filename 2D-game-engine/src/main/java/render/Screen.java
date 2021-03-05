@@ -19,20 +19,19 @@ public class Screen extends Canvas {
 	private static final long serialVersionUID = -7004570169397651722L;
 
 	/** the JFrame. */
-	public JFrame frame;
+	public JFrame frame = new JFrame();
 	
 	/** List of pixels that will be drawn to screen. */
 	public int[] pixels;
 
-	public static RenderMode rm;
+	public RenderMode rm;
 
 	public BufferedImage inBetween;
 
 	/** List of shapes. */
 	public static List<Shape> shapes = new ArrayList<>();
 	
-	public Screen(JFrame frame, Dimension dimension, RenderMode rm) {
-		this.frame = frame;
+	public Screen(Dimension dimension, RenderMode rm) {
 		frame.setPreferredSize(dimension);
 		frame.getContentPane().add(this);
 		frame.pack();
@@ -95,23 +94,22 @@ public class Screen extends Canvas {
 				shape.animIndex = ((shape.animIndex + 1) % shape.getAnimation().getSprites().size());
 			}
 		}
-		
+
 		for (int i = 0; i < pixels.length; i++) {
 			inBetween.setRGB(i % inBetween.getHeight(), i / inBetween.getWidth(), pixels[i]);
 		}
 	}
-	
+
 	/** Renders the shapes to the frame. */
 	public void render() {
-		
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
 			createBufferStrategy(3);
 			return;
 		}
-		
+
 		setPixels();
-		
+
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(inBetween, 0, 0, getWidth(), getHeight(), null);
 		g.dispose();

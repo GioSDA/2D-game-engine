@@ -4,20 +4,15 @@ import java.io.IOException;
 
 public class MainLoop {
 
-	public static Main main = null;
-
-	static {
-		try {
-			main = new Main();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public static void main(String[] args) throws IOException {
 		Main main = new Main();
 
-		setUpScreen();
+		main.screen.addKeyListener(main.key);
+		main.screen.addMouseListener(main.mouse);
+		main.screen.setFocusable(true);
+		main.screen.requestFocus();
+		main.screen.enableFrame();
+
 		main.onStart();
 
 		long timer = System.currentTimeMillis();
@@ -55,14 +50,6 @@ public class MainLoop {
 				ticks = 0;
 			}
 		}
-	}
-	
-	public static void setUpScreen() {
-		main.screen.addKeyListener(main.key);
-		main.screen.addMouseListener(main.mouse);
-		main.screen.setFocusable(true);
-		main.screen.requestFocus();
-		main.screen.enableFrame();
 	}
 
 }

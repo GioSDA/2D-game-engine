@@ -6,7 +6,6 @@ import main.java.sprite.Sprite;
 import main.java.sprite.SpriteMap;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -17,13 +16,13 @@ public class Main extends Game {
 	
 	public final File file = new File(Objects.requireNonNull(Main.class.getClassLoader().getResource("main/res/images/GameIcon.png")).getFile());
 	public final File file2 = new File(Objects.requireNonNull(Main.class.getClassLoader().getResource("main/res/images/GameIconFlipped.png")).getFile());
-	
+
 	public Main() throws IOException {
 		fps = 60;
 		debugMode = true;
 		
-		screen = new Screen(new JFrame(), new Dimension(400, 400), renderMode);
-		
+		screen = new Screen(new Dimension(400, 400), renderMode);
+
 		//Rectangle tests
 		screen.Rect(0, 0, new Sprite(ImageIO.read(file)));
 		screen.Rect(150, 150, 100, 100, Color.RED);
@@ -39,13 +38,13 @@ public class Main extends Game {
 		Animation anim = new Animation(new ArrayList<>());
 		anim.getSprites().add(new Sprite(ImageIO.read(file)));
 		anim.getSprites().add(new Sprite(ImageIO.read(file2)));
-				
+
 		screen.Rect(0, 200, anim);
 	}
 
 	@Override
 	public void tick() {
-		System.out.println("Tick Works!");
+//		screen.render();
 	}
 
 	@Override
