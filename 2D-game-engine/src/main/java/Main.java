@@ -21,7 +21,7 @@ public class Main extends Game {
 		fps = 60;
 		debugMode = true;
 		
-		screen = new Screen(new Dimension(400, 400), this);
+		screen = new Screen(new Dimension(800, 800), this);
 
 		//Rectangle tests
 		Rect(0, 0, new Sprite(ImageIO.read(file)));
@@ -45,7 +45,7 @@ public class Main extends Game {
 	@Override
 	public void tick() {
 		if (screen.getMousePosition() != null) {
-			Rect(mouseMotion.x, mouseMotion.y, 10, 10, Color.GREEN);
+			Rect((int) mouseMotion.x, (int) mouseMotion.y, 10, 10, Color.GREEN);
 			System.out.println(mouseMotion.x + " " + mouseMotion.y);
 		}
 	}

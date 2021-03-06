@@ -1,8 +1,6 @@
 package main.java.render;
 
 import main.java.Game;
-import main.java.input.MouseInput;
-import main.java.shape.RenderMode;
 import main.java.shape.Shape;
 
 import javax.swing.*;
@@ -26,7 +24,9 @@ public class Screen extends Canvas {
 	public BufferedImage inBetween;
 	
 	public Screen(Dimension dimension, Game game) {
-		frame.setPreferredSize(dimension);
+		this.setSize(dimension);
+
+		frame.setSize(this.getWidth(),this.getHeight());
 		frame.getContentPane().add(this);
 		frame.pack();
 		frame.setLocationRelativeTo(null);

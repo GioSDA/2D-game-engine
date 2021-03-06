@@ -5,17 +5,35 @@ import java.awt.event.MouseMotionListener;
 
 public class MouseMotionInput implements MouseMotionListener {
 
-    public int x,y;
+    public double x,y;
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        x = e.getX();
-        y = e.getY();
+        try {
+            x = e.getX() + (17 / ((double) e.getComponent().getWidth() / e.getX()));
+        } catch (ArithmeticException arithmeticException) {
+            x = 0;
+        }
+
+        try {
+            y = e.getY() + (40 / ((double) e.getComponent().getHeight() / e.getY()));
+        } catch (ArithmeticException arithmeticException) {
+            y = 0;
+        }
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        x = e.getX();
-        y = e.getY();
+        try {
+            x = e.getX() + (17 / ((double) e.getComponent().getWidth() / e.getX()));
+        } catch (ArithmeticException arithmeticException) {
+            x = 0;
+        }
+
+        try {
+            y = e.getY() + (40 / ((double) e.getComponent().getHeight() / e.getY()));
+        } catch (ArithmeticException arithmeticException) {
+            y = 0;
+        }
     }
 }
