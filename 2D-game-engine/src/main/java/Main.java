@@ -21,25 +21,25 @@ public class Main extends Game {
 		fps = 60;
 		debugMode = true;
 		
-		screen = new Screen(new Dimension(400, 400), renderMode);
+		screen = new Screen(new Dimension(400, 400), this);
 
 		//Rectangle tests
-		screen.Rect(0, 0, new Sprite(ImageIO.read(file)));
-		screen.Rect(150, 150, 100, 100, Color.RED);
+		Rect(0, 0, new Sprite(ImageIO.read(file)));
+		Rect(150, 150, 100, 100, Color.RED);
 		
 		//Spritemap test
 		SpriteMap sm = new SpriteMap(ImageIO.read(file), 2, 2);
-		screen.Rect(175, 175, sm.getSprite(0, 0));
-		screen.Rect(175, 239, sm.getSprite(0, 1));
-		screen.Rect(239, 175, sm.getSprite(1, 0));
-		screen.Rect(239, 239, sm.getSprite(1, 1));
+		Rect(175, 175, sm.getSprite(0, 0));
+		Rect(175, 239, sm.getSprite(0, 1));
+		Rect(239, 175, sm.getSprite(1, 0));
+		Rect(239, 239, sm.getSprite(1, 1));
 		
 		//Animation test
 		Animation anim = new Animation(new ArrayList<>());
 		anim.getSprites().add(new Sprite(ImageIO.read(file)));
 		anim.getSprites().add(new Sprite(ImageIO.read(file2)));
 
-		screen.Rect(0, 200, anim);
+		Rect(0, 200, anim);
 	}
 
 	@Override
