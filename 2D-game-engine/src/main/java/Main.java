@@ -44,7 +44,10 @@ public class Main extends Game {
 
 	@Override
 	public void tick() {
-
+		if (screen.getMousePosition() != null) {
+			Rect(mouseMotion.x, mouseMotion.y, 10, 10, Color.GREEN);
+			System.out.println(mouseMotion.x + " " + mouseMotion.y);
+		}
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 public class KeyboardInput implements KeyListener {
 
 	/** Current keys being pressed. */
-	public static boolean[] keys = new boolean[500];
+	public boolean[] keys = new boolean[500];
 	
 	public void keyPressed(KeyEvent arg0) {
 		keys[arg0.getKeyCode()] = true;

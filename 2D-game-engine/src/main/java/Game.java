@@ -2,6 +2,7 @@ package main.java;
 
 import main.java.input.KeyboardInput;
 import main.java.input.MouseInput;
+import main.java.input.MouseMotionInput;
 import main.java.render.Screen;
 import main.java.shape.Rectangle;
 import main.java.shape.RenderMode;
@@ -24,7 +25,7 @@ public abstract class Game {
     public RenderMode renderMode = RenderMode.LU_CORNER;
 
     /** List of shapes. */
-    public static List<Shape> shapes = new ArrayList<>();
+    public List<Shape> shapes = new ArrayList<>();
 
     /** Screen. */
     public Screen screen;
@@ -33,6 +34,8 @@ public abstract class Game {
     public final KeyboardInput key = new KeyboardInput();
     /** Mouse Input. */
     public final MouseInput mouse = new MouseInput();
+    /** Mouse Movement Input */
+    public final MouseMotionInput mouseMotion = new MouseMotionInput();
 
     /** Toggles debug mode. */
     public boolean debugMode = false;

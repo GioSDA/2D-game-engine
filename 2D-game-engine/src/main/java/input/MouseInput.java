@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 public class MouseInput implements MouseListener {
 
 	/** Current mouse buttons being pressed. */
-	public static boolean[] mouseButtons = new boolean[15];
+	public boolean[] mouseButtons = new boolean[15];
 	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {

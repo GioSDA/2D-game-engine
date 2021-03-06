@@ -1,6 +1,7 @@
 package main.java.render;
 
 import main.java.Game;
+import main.java.input.MouseInput;
 import main.java.shape.RenderMode;
 import main.java.shape.Shape;
 
@@ -35,6 +36,9 @@ public class Screen extends Canvas {
 		frame.setFocusable(true);
 		frame.requestFocus();
 
+		this.addMouseListener(game.mouse);
+		this.addMouseMotionListener(game.mouseMotion);
+		this.addKeyListener(game.key);
 
 		this.game = game;
 
