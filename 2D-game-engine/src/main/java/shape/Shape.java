@@ -102,5 +102,4 @@ public abstract class Shape {
 	public boolean isAnimated() {
 		return animated;
 	}
-	
 }

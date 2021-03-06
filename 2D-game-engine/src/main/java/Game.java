@@ -129,4 +129,30 @@ public abstract class Game {
     public void changeItem(int index, Image newValue, List<Image> list) {
         list.set(index, newValue);
     }
+
+    /**
+     * Removes a shape with the specified hash code.
+     * @param hashCode The hash code of the shape to be removed.
+     */
+    public void removeShapeByHash(int hashCode) {
+        for (int i = 0; i < shapes.size(); i++) {
+            if (shapes.get(i).hashCode() == hashCode) {
+                shapes.remove(i);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Edits a shape with the specified hash code.
+     * @param hashCode The index to be changed.
+     * @param newValue The value to change the new index to.
+     */
+    public void changeShapeByHash(int hashCode, Shape newValue) {
+        for (int i = 0; i < shapes.size(); i++) {
+            if (shapes.get(i).hashCode() == hashCode) {
+                shapes.set(i, newValue);
+            }
+        }
+    }
 }

@@ -44,7 +44,7 @@ public class Main extends Game {
 
 	@Override
 	public void tick() {
-//		screen.render();
+
 	}
 
 	@Override
